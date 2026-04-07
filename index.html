@@ -3,9 +3,659 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sumit Tiruwa | Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Sumit Tiruwa — Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0a0f;
+            --bg2: #111118;
+            --bg3: #16161f;
+            --surface: #1c1c28;
+            --border: rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.15);
+            --accent: #c8f56a;
+            --accent2: #7c6af5;
+            --accent3: #f56a6a;
+            --text: #f0ede8;
+            --text-muted: #7a7888;
+            --text-dim: #4a4860;
+            --card: #13131c;
+            --card-hover: #1a1a28;
+            --glow: rgba(200,245,106,0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── Grain overlay ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4rem;
+            height: 72px;
+            background: rgba(10,10,15,0.85);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: -1px;
+        }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+        .nav-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+        /* ── Hamburger ── */
+        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+        .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--text); transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 72px 0 0;
+            background: rgba(10,10,15,0.97);
+            z-index: 99;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .mobile-menu a:hover { color: var(--accent); }
+
+        /* ── Section base ── */
+        section { padding: 120px 4rem; max-width: 1200px; margin: 0 auto; }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* ── Reveal ── */
+        .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 72px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 5rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            border: 1px solid rgba(200,245,106,0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 2s infinite; }
+
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 9vw, 7rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+        }
+        .hero-name .line2 {
+            display: block;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--text);
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 480px;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--accent);
+            color: #0a0a0f;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.25s;
+            letter-spacing: 0.02em;
+        }
+        .btn-primary:hover { background: #d8ff7a; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(200,245,106,0.3); }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.8rem;
+            border: 1px solid var(--border-hover);
+            border-radius: 6px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.25s;
+        }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ── Hero photo ── */
+       /* Container for the photo */
+.hero-photo-wrap {
+    position: relative;
+    width: 200px;        /* smaller width */
+    margin: 0 auto;      /* center horizontally */
+}
+
+/* Gradient border behind photo */
+.hero-photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -3px;                 /* slightly larger than image */
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), transparent);
+    z-index: 0;
+}
+
+/* Photo itself */
+.hero-photo-wrap img,
+.photo-placeholder {
+    position: relative;
+    z-index: 1;
+    width: 100%;             /* fill container width */
+    aspect-ratio: 3 / 4;     /* keep ratio */
+    border-radius: 18px;     /* slightly smaller than border */
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder if no image */
+.photo-placeholder {
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+}
+
+/* Scroll hint text (optional) */
+.hero-scroll-hint {
+    position: absolute;
+    bottom: -2rem;           /* closer to photo */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Small line in scroll hint */
+.scroll-line {
+    width: 30px;            /* smaller line */
+    height: 1px;
+    background: var(--text-dim);
+}
+
+        /* ── ABOUT ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            line-height: 1.9;
+        }
+        .about-text strong { color: var(--text); font-weight: 500; }
+
+        .info-cards { display: flex; flex-direction: column; gap: 0.75rem; }
+        .info-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .info-card:hover { border-color: var(--border-hover); background: var(--card-hover); }
+        .info-card-icon { font-size: 1.2rem; }
+        .info-card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.15rem;
+        }
+        .info-card-value { font-size: 0.9rem; color: var(--text); }
+        .info-card-value a { color: var(--accent); text-decoration: none; }
+        .info-card-value a:hover { text-decoration: underline; }
+
+        /* ── SKILLS ── */
+        #skills { background: none; }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.85rem;
+            margin-top: 3rem;
+        }
+        .skill-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.25s;
+            cursor: default;
+        }
+        .skill-item:hover {
+            border-color: var(--accent);
+            background: var(--card-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(200,245,106,0.08);
+        }
+        .skill-icon { font-size: 1.3rem; }
+        .skill-name { font-size: 0.88rem; font-weight: 500; }
+        .skill-type { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-dim); }
+
+        /* ── PROJECTS ── */
+        #projects { background: none; }
+        .projects-grid { display: flex; flex-direction: column; gap: 2rem; margin-top: 3rem; }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+        }
+
+        .project-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+        .project-top-left { display: flex; align-items: flex-start; gap: 1rem; flex: 1; }
+        .project-icon {
+            font-size: 1.5rem;
+            width: 48px; height: 48px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .project-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .project-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+        .project-desc strong { color: var(--text); font-weight: 500; }
+
+        .project-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            border: 1px solid rgba(200,245,106,0.3);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            white-space: nowrap;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .project-link:hover { background: rgba(200,245,106,0.1); border-color: var(--accent); }
+
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .project-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── Gallery ── */
+        .project-gallery { margin-top: 0; }
+        .gallery-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .gallery-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.6rem;
+        }
+
+        .gallery-slot {
+            position: relative;
+            aspect-ratio: 16/10;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .gallery-slot:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+
+        .slot-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .gallery-slot:hover .slot-img { transform: scale(1.05); }
+
+        .slot-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 0.5rem 0.6rem 0.4rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            display: none;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .slot-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--accent);
+        }
+        .slot-label { font-size: 0.7rem; color: var(--text); font-weight: 500; }
+
+        .slot-empty-state {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+        .slot-empty-state .slot-num { color: var(--text-dim); font-size: 0.65rem; }
+        .slot-empty-state .slot-label { color: var(--text-dim); font-size: 0.68rem; }
+
+        /* Slot placeholder pattern */
+        .slot-empty-state::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 0, transparent 50%);
+            background-size: 10px 10px;
+        }
+
+        /* ── Lightbox ── */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.94);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+        }
+        .lightbox.open { display: flex; }
+        .lightbox-inner { max-width: 88vw; max-height: 88vh; }
+        .lightbox-img { max-width: 88vw; max-height: 80vh; object-fit: contain; border-radius: 8px; display: block; }
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem; right: 2rem;
+            background: none; border: none;
+            font-size: 1.5rem; color: var(--text-muted);
+            cursor: pointer; transition: color 0.2s;
+            z-index: 10;
+        }
+        .lightbox-close:hover { color: var(--text); }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.12); border-color: var(--accent); color: var(--accent); }
+        .lightbox-prev { left: 2rem; }
+        .lightbox-next { right: 2rem; }
+        .lightbox-caption {
+            position: absolute;
+            bottom: 2rem; left: 50%;
+            transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+        }
+
+        /* ── CONTACT ── */
+        .contact-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .contact-inner > div:first-child p { color: var(--text-muted); margin-bottom: 2rem; }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            transition: all 0.2s;
+        }
+        .contact-link:hover { border-color: var(--accent); background: var(--card-hover); transform: translateX(4px); }
+        .contact-link-icon { font-size: 1.1rem; }
+        .contact-link-info { flex: 1; }
+        .contact-link-info .label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+        .contact-link-info .value { font-size: 0.9rem; }
+        .contact-link-arrow { color: var(--text-dim); transition: color 0.2s; }
+        .contact-link:hover .contact-link-arrow { color: var(--accent); }
+
+        .big-cta {
+            background: linear-gradient(135deg, var(--surface) 0%, #1a1a2e 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+        }
+        .big-cta h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .big-cta p { color: var(--text-muted); margin-bottom: 2rem; }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100%;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+        .footer-copy { font-size: 0.82rem; color: var(--text-dim); }
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+        .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links, .nav-status { display: none; }
+            .hamburger { display: flex; }
+            section { padding: 80px 1.5rem; }
+            #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .hero-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-photo-wrap { max-width: 280px; margin: 0 auto; }
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+            footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+        }
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .project-top { flex-direction: column; gap: 0.75rem; }
+            .project-link { align-self: flex-start; }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,6 +670,7 @@
         <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
 
+    <!-- ── Mobile menu ── -->
     <div class="mobile-menu" id="mobileMenu">
         <a href="#about" onclick="closeMenu()">About</a>
         <a href="#skills" onclick="closeMenu()">Skills</a>
@@ -35,6 +686,10 @@
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="nav-status">
+            <div class="nav-dot"></div>
+            Available
+        </div>
         <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
             <span></span><span></span><span></span>
         </button>
@@ -51,19 +706,14 @@
                     <a href="#projects" class="btn-primary">View Projects ↗</a>
                     <a href="#contact" class="btn-outline">Get in Touch</a>
                 </div>
+                <div class="hero-scroll-hint"><div class="scroll-line"></div>Scroll to explore</div>
             </div>
-
             <div class="hero-photo-wrap">
-                <!--
-                    TO ADD YOUR PHOTO:
-                    Replace this entire <div class="photo-placeholder"> block with:
-                    <img src="profile.jpeg" alt="Sumit Tiruwa">
-                -->
-                     <img src="profile.jpeg" alt="Sumit Tiruwa">
-                <div class="photo-placeholder">
+                <img src="profile.jpeg" alt="Sumit Tiruwa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="photo-placeholder" style="display:none;">
                     <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                        <circle cx="30" cy="21" r="11" stroke="#7A776E" stroke-width="2"/>
-                        <path d="M6 54c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="#7A776E" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="30" cy="21" r="11" stroke="#4a4860" stroke-width="2"/>
+                        <path d="M6 54c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="#4a4860" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                     <span>Your photo here</span>
                 </div>
@@ -81,11 +731,35 @@
                 <p>My workflow spans from designing backend systems with <strong>Laravel & PHP</strong> to building reactive frontends with <strong>React & JavaScript</strong>. I'm comfortable containerizing with <strong>Docker</strong>, managing projects in <strong>Jira</strong>, and shipping with <strong>Git</strong>.</p>
                 <p>When I'm not coding, I'm exploring new frameworks, contributing to projects, and leveling up my engineering skills.</p>
             </div>
-            <div>
-                <div class="info-row"><div class="info-row-icon">📱</div><div><div class="info-row-label">Phone</div><div class="info-row-value">9813609377</div></div></div>
-                <div class="info-row"><div class="info-row-icon">✉️</div><div><div class="info-row-label">Email</div><div class="info-row-value"><a href="mailto:sumittiruwa@913">sumittiruwa@913</a></div></div></div>
-                <div class="info-row"><div class="info-row-icon">🎓</div><div><div class="info-row-label">Education</div><div class="info-row-value">BCA — In Progress</div></div></div>
-                <div class="info-row"><div class="info-row-icon">🐙</div><div><div class="info-row-label">GitHub</div><div class="info-row-value"><a href="https://github.com/sumittiruwa/" target="_blank">sumittiruwa</a></div></div></div>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-card-icon">📱</div>
+                    <div>
+                        <div class="info-card-label">Phone</div>
+                        <div class="info-card-value"><a href="tel:9813609377">9813609377</a></div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">✉️</div>
+                    <div>
+                        <div class="info-card-label">Email</div>
+                        <div class="info-card-value"><a href="mailto:sumittiruwa@913">sumittiruwa@913</a></div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">🎓</div>
+                    <div>
+                        <div class="info-card-label">Education</div>
+                        <div class="info-card-value">BCA — In Progress</div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">🐙</div>
+                    <div>
+                        <div class="info-card-label">GitHub</div>
+                        <div class="info-card-value"><a href="https://github.com/sumittiruwa/" target="_blank">sumittiruwa</a></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -93,7 +767,7 @@
     <!-- ── SKILLS ── -->
     <section id="skills">
         <div class="section-label">02 — Skills</div>
-        <h2 class="section-title reveal">Tools & Technologies</h2>
+        <h2 class="section-title reveal">Tools &amp; Technologies</h2>
         <div class="skills-grid reveal">
             <div class="skill-item"><div class="skill-icon">🐳</div><div><div class="skill-name">Docker</div><div class="skill-type">DevOps</div></div></div>
             <div class="skill-item"><div class="skill-icon">📋</div><div><div class="skill-name">Jira</div><div class="skill-type">Project Mgmt</div></div></div>
@@ -113,204 +787,162 @@
     <!-- ── PROJECTS ── -->
     <section id="projects">
         <div class="section-label">03 — Projects</div>
-        <h2 class="section-title reveal">Featured Projects</h2>
-        <div class="projects-list reveal">
+        <h2 class="section-title reveal">Selected Work</h2>
+        <div class="projects-grid">
 
             <!-- Sports Shop -->
-            <div class="project-card">
+            <div class="project-card reveal">
                 <div class="project-top">
                     <div class="project-top-left">
                         <div class="project-icon">👟</div>
                         <div class="project-meta">
-                            <div class="project-name">Sports Shop E-Commerce</div>
+                            <div class="project-name">E-Commerce (Sports Shop )</div>
                             <div class="project-desc">A full-featured sports equipment e-commerce platform built as a 4th semester project. Features product listings, cart management, user authentication, order tracking, and an admin dashboard for inventory management.</div>
                         </div>
                     </div>
                     <a href="https://github.com/sumittiruwa/Sports_shop_E-commerce" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
                 </div>
                 <div class="project-tags">
-                    <span class="project-tag">PHP</span><span class="project-tag">Laravel</span><span class="project-tag">Bootstrap</span>
-                    <span class="project-tag">JavaScript</span><span class="project-tag">MySQL</span><span class="project-tag">4th Sem Project</span>
+                    <span class="project-tag">PHP</span>
+                    <span class="project-tag">Laravel</span>
+                    <span class="project-tag">Bootstrap</span>
+                    <span class="project-tag">JavaScript</span>
+                    <span class="project-tag">MySQL</span>
+                    <span class="project-tag">4th Sem Project</span>
                 </div>
                 <div class="project-gallery">
                     <div class="gallery-label">Interface Preview</div>
                     <div class="gallery-grid">
-                        <!-- Replace src="" with your image paths, e.g. src="Img/sports/home.png" -->
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="Homepage" data-label="Homepage">
-                            <div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Homepage" data-label="Homepage"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Products" data-label="Products"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Products</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Products</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Cart" data-label="Cart"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Cart</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Cart</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Orders" data-label="Orders"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Orders</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Orders</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Admin" data-label="Admin"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Admin</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Admin</span></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-Time Chat -->
+            <div class="project-card reveal">
+                <div class="project-top">
+                    <div class="project-top-left">
+                        <div class="project-icon">💬</div>
+                        <div class="project-meta">
+                            <div class="project-name">Real-Time Chatting (Dating)</div>
+                            <div class="project-desc">A responsive real-time chat application. Users can send instant messages, view online/offline status, manage profiles, and receive unread message notifications — all in a sleek, mobile-friendly interface.</div>
                         </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="Products" data-label="Products">
-                            <div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Products</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-num">02</span><span class="slot-label">Products</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="Cart" data-label="Cart">
-                            <div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Cart</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Cart</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="Checkout" data-label="Checkout">
-                            <div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Checkout</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Checkout</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="Dashboard" data-label="Dashboard">
-                            <div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Dashboard</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Dashboard</span></div>
-                        </div>
+                    </div>
+                    <a href="https://github.com/sumittiruwa/Real_Time_chatting_App_" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
+                </div>
+                <div class="project-tags">
+                    <span class="project-tag">Node.js</span>
+                    <span class="project-tag">PHP</span>
+                    <span class="project-tag">MySQL</span>
+                    <span class="project-tag">WebSockets</span>
+                    <span class="project-tag">Bootstrap</span>
+                    <span class="project-tag">Real-Time</span>
+                </div>
+                <div class="project-gallery">
+                    <div class="gallery-label">Interface Preview</div>
+                    <div class="gallery-grid">
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/homepage.png" alt="Chat UI" data-label="Chat UI"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Home Page</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Chat UI</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/livechat.png" alt="Contacts" data-label="Contacts"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Live Chat </span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Contacts</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/userdashboard.png" alt="Profile" data-label="Profile"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">User dashboard</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Profile</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/notification.png" alt="Notifications" data-label="Notifications"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Notifications</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Notifications</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/userprofile.png" alt="Mobile" data-label="Mobile"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Mobile</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Profile</span></div></div>
                     </div>
                 </div>
             </div>
 
             <!-- Netflix Clone -->
-            <div class="project-card">
+            <div class="project-card reveal">
                 <div class="project-top">
                     <div class="project-top-left">
                         <div class="project-icon">🎬</div>
                         <div class="project-meta">
-                            <div class="project-name">Netflix Clone</div>
-                            <div class="project-desc">A full-featured Netflix-inspired streaming platform built with Laravel & PHP. Integrates Google API and YouTube API for content discovery, Stripe for secure payment processing, and custom recommendation algorithms.</div>
+                            <div class="project-name">Movie Recommendation (Netflix Clone)</div>
+                            <div class="project-desc">A Netflix-inspired streaming platform integrating <strong>Google API</strong> and <strong>YouTube API</strong> for content discovery, <strong>Stripe</strong> for secure payment processing, and custom recommendation algorithms for personalized viewing.</div>
                         </div>
                     </div>
                     <a href="https://github.com/sumittiruwa/Netflix-clone" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
                 </div>
                 <div class="project-tags">
-                    <span class="project-tag">Laravel</span><span class="project-tag">PHP</span><span class="project-tag">Google API</span>
-                    <span class="project-tag">YouTube API</span><span class="project-tag">Stripe</span><span class="project-tag">Algorithm</span>
+                    <span class="project-tag">Laravel</span>
+                    <span class="project-tag">PHP</span>
+                    <span class="project-tag">Google API</span>
+                    <span class="project-tag">YouTube API</span>
+                    <span class="project-tag">Stripe</span>
+                    <span class="project-tag">Algorithm</span>
                 </div>
                 <div class="project-gallery">
                     <div class="gallery-label">Interface Preview</div>
                     <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="Img/movieRecommendation/Home.png" alt="Homepage" data-label="Homepage">
-                            <div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="Img/movieRecommendation/Login.png" alt="Login" data-label="Browse">
-                            <div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Browse</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Browse</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="Img/movieRecommendation/dasshboard.png" alt="Dashboard" data-label="Player">
-                            <div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Player</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Player</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="Img/movieRecommendation/Profle.png" alt="Profile" data-label="Profile">
-                            <div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Profile</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Profile</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="Img/movieRecommendation/Payment.png  " alt="Payment" data-label="Payment">
-                            <div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Payment</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Payment</span></div>
-                        </div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Home" data-label="Home"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Home</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Home</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Browse" data-label="Browse"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Browse</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Browse</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Player" data-label="Player"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Player</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Player</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Payment" data-label="Payment"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Payment</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Payment</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Recommendations" data-label="Recommendations"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Recommendations</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Recommendations</span></div></div>
                     </div>
                 </div>
             </div>
 
             <!-- Inventory System -->
-            <div class="project-card">
+            <div class="project-card reveal">
                 <div class="project-top">
                     <div class="project-top-left">
                         <div class="project-icon">📦</div>
                         <div class="project-meta">
-                            <div class="project-name">Inventory System</div>
-                            <div class="project-desc">A comprehensive inventory management system for tracking stock, orders, and suppliers. Built with PHP for the backend, Bootstrap for a responsive UI, and JavaScript for dynamic interactions.</div>
+                            <div class="project-name">Inventory Management System (Shop Management)</div>
+                            <div class="project-desc">A comprehensive inventory management system for tracking stock, orders, and suppliers. Built with <strong>PHP</strong> for the backend, <strong>Bootstrap</strong> for a responsive UI, and <strong>JavaScript</strong> for dynamic interactions.</div>
                         </div>
                     </div>
                     <a href="https://github.com/sumittiruwa/Inventory_System" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
                 </div>
                 <div class="project-tags">
-                    <span class="project-tag">PHP</span><span class="project-tag">Bootstrap</span>
-                    <span class="project-tag">JavaScript</span><span class="project-tag">MySQL</span>
+                    <span class="project-tag">PHP</span>
+                    <span class="project-tag">Bootstrap</span>
+                    <span class="project-tag">JavaScript</span>
+                    <span class="project-tag">MySQL</span>
                 </div>
                 <div class="project-gallery">
                     <div class="gallery-label">Interface Preview</div>
                     <div class="gallery-grid">
-                        <!--
-                            HOW TO USE:
-                            Set src="your-image-path.jpg" on each <img class="slot-img">.
-                            The image auto-fills the slot and opens full-size in the lightbox on click.
-                            Leave src="" to show the numbered placeholder.
-                        -->
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="Img/Inventory/1.png" alt="Dashboard" data-label="Dashboard">
-                            <div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Dashboard</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Dashboard</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="stock.jpeg" alt="Stock" data-label="Stock">
-                            <div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Stock</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Stock</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="orders.jpeg" alt="Orders" data-label="Orders">
-                            <div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Orders</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Orders</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="suppliers.jpeg" alt="Suppliers" data-label="Suppliers">
-                            <div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Suppliers</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Suppliers</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="reports.jpeg" alt="Reports" data-label="Reports">
-                            <div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Reports</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Reports</span></div>
-                        </div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/Inventory/1.png" alt="Dashboard" data-label="Dashboard"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Dashboard</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Dashboard</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="stock.jpeg" alt="Stock" data-label="Stock"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Stock</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Stock</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="orders.jpeg" alt="Orders" data-label="Orders"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Orders</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Orders</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="suppliers.jpeg" alt="Suppliers" data-label="Suppliers"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Suppliers</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Suppliers</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="reports.jpeg" alt="Reports" data-label="Reports"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Reports</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Reports</span></div></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Wheels -->
-            <div class="project-card">
+            <!-- Wheels Car Rental -->
+            <div class="project-card reveal">
                 <div class="project-top">
                     <div class="project-top-left">
                         <div class="project-icon">🚗</div>
                         <div class="project-meta">
-                            <div class="project-name">Wheels — Car Rental</div>
-                            <div class="project-desc">A car rental system with vehicle browsing, booking management, and Khalti payment gateway integration. Built with PHP, JavaScript, and Bootstrap for a smooth rental experience.</div>
+                            <div class="project-name"> Rental System (Car Rental)</div>
+                            <div class="project-desc">A car rental system with vehicle browsing, booking management, and <strong>Khalti</strong> payment gateway integration. Built with <strong>PHP</strong>, <strong>JavaScript</strong>, and <strong>Bootstrap</strong> for a smooth rental experience.</div>
                         </div>
                     </div>
                     <a href="https://github.com/sumittiruwa/wheels" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
                 </div>
                 <div class="project-tags">
-                    <span class="project-tag">PHP</span><span class="project-tag">JavaScript</span>
-                    <span class="project-tag">Bootstrap</span><span class="project-tag">Khalti Payment</span><span class="project-tag">MySQL</span>
+                    <span class="project-tag">PHP</span>
+                    <span class="project-tag">JavaScript</span>
+                    <span class="project-tag">Bootstrap</span>
+                    <span class="project-tag">Khalti Payment</span>
+                    <span class="project-tag">MySQL</span>
                 </div>
                 <div class="project-gallery">
                     <div class="gallery-label">Interface Preview</div>
                     <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="Homepage" data-label="Homepage">
-                            <div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="Fleet" data-label="Fleet">
-                            <div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="Booking" data-label="Booking">
-                            <div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Booking</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Booking</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="Payment" data-label="Payment">
-                            <div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Payment</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Payment</span></div>
-                        </div>
-                        <div class="gallery-slot" onclick="slotClick(this)">
-                            <img class="slot-img" src="" alt="My Bookings" data-label="My Bookings">
-                            <div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div>
-                            <div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div>
-                        </div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Homepage" data-label="Homepage"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Fleet" data-label="Fleet"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Booking" data-label="Booking"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Booking</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Booking</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Payment" data-label="Payment"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Payment</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Payment</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="My Bookings" data-label="My Bookings"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div></div>
                     </div>
                 </div>
             </div>
@@ -325,9 +957,21 @@
             <div class="reveal">
                 <h2 class="section-title">Let's build<br>something great.</h2>
                 <p>Whether you have a project in mind, a collaboration idea, or just want to connect — my inbox is always open.</p>
-                <a href="tel:9813609377" class="contact-link"><div class="contact-link-icon">📱</div><div class="contact-link-info"><div class="label">Phone</div><div class="value">9813609377</div></div><div class="contact-link-arrow">→</div></a>
-                <a href="mailto:sumittiruwa@913" class="contact-link"><div class="contact-link-icon">✉️</div><div class="contact-link-info"><div class="label">Email</div><div class="value">sumittiruwa@913</div></div><div class="contact-link-arrow">→</div></a>
-                <a href="https://github.com/sumittiruwa/" target="_blank" class="contact-link"><div class="contact-link-icon">🐙</div><div class="contact-link-info"><div class="label">GitHub</div><div class="value">github.com/sumittiruwa</div></div><div class="contact-link-arrow">→</div></a>
+                <a href="tel:9813609377" class="contact-link">
+                    <div class="contact-link-icon">📱</div>
+                    <div class="contact-link-info"><div class="label">Phone</div><div class="value">9813609377</div></div>
+                    <div class="contact-link-arrow">→</div>
+                </a>
+                <a href="mailto:sumittiruwa@913" class="contact-link">
+                    <div class="contact-link-icon">✉️</div>
+                    <div class="contact-link-info"><div class="label">Email</div><div class="value">sumittiruwa@913</div></div>
+                    <div class="contact-link-arrow">→</div>
+                </a>
+                <a href="https://github.com/sumittiruwa/" target="_blank" class="contact-link">
+                    <div class="contact-link-icon">🐙</div>
+                    <div class="contact-link-info"><div class="label">GitHub</div><div class="value">github.com/sumittiruwa</div></div>
+                    <div class="contact-link-arrow">→</div>
+                </a>
             </div>
             <div class="big-cta reveal">
                 <h3>Open to Work</h3>
@@ -369,7 +1013,7 @@
         }, { threshold: 0.06 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        /* ── Gallery slot init: show/hide img vs empty-state ── */
+        /* ── Gallery slot init ── */
         function initSlots() {
             document.querySelectorAll('.gallery-slot').forEach(slot => {
                 const img = slot.querySelector('.slot-img');
@@ -378,19 +1022,18 @@
                 const hasSrc = img && img.getAttribute('src') && img.getAttribute('src').trim() !== '';
                 if (hasSrc) {
                     if (caption) caption.style.display = 'flex';
-                    if (empty)   empty.style.display   = 'none';
-                    // show img only when loaded
+                    if (empty) empty.style.display = 'none';
                     img.style.display = 'block';
-                    img.onerror = function() {
+                    img.onerror = function () {
                         this.style.display = 'none';
                         if (caption) caption.style.display = 'none';
-                        if (empty)   empty.style.display   = 'flex';
+                        if (empty) empty.style.display = 'flex';
                         slot.style.cursor = 'default';
                     };
                 } else {
-                    if (img)     img.style.display     = 'none';
+                    if (img) img.style.display = 'none';
                     if (caption) caption.style.display = 'none';
-                    if (empty)   empty.style.display   = 'flex';
+                    if (empty) empty.style.display = 'flex';
                     slot.style.cursor = 'default';
                 }
             });
@@ -398,13 +1041,11 @@
         initSlots();
 
         /* ── Lightbox ── */
-        let lbSlots = [];
-        let lbIndex = 0;
+        let lbSlots = [], lbIndex = 0;
 
         function slotClick(slot) {
             const img = slot.querySelector('.slot-img');
             if (!img || !img.getAttribute('src') || img.getAttribute('src').trim() === '') return;
-            // collect all sibling slots in the same grid that have images
             const grid = slot.closest('.gallery-grid');
             lbSlots = Array.from(grid.querySelectorAll('.gallery-slot')).filter(s => {
                 const si = s.querySelector('.slot-img');
@@ -416,11 +1057,10 @@
 
         function showLightbox() {
             const slot = lbSlots[lbIndex];
-            const img  = slot.querySelector('.slot-img');
-            const lbl  = img.getAttribute('data-label') || '';
+            const img = slot.querySelector('.slot-img');
+            const lbl = img.getAttribute('data-label') || '';
             document.getElementById('lightboxImg').src = img.src;
-            document.getElementById('lightboxCaption').textContent =
-                lbl + '  ' + (lbIndex + 1) + ' / ' + lbSlots.length;
+            document.getElementById('lightboxCaption').textContent = lbl + '  ' + (lbIndex + 1) + ' / ' + lbSlots.length;
             document.getElementById('lightbox').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
@@ -436,14 +1076,14 @@
             showLightbox();
         }
 
-        document.getElementById('lightbox').addEventListener('click', function(e) {
+        document.getElementById('lightbox').addEventListener('click', function (e) {
             if (e.target === this) closeLightbox();
         });
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (!document.getElementById('lightbox').classList.contains('open')) return;
-            if (e.key === 'Escape')      closeLightbox();
-            if (e.key === 'ArrowRight')  lightboxNav(1);
-            if (e.key === 'ArrowLeft')   lightboxNav(-1);
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') lightboxNav(1);
+            if (e.key === 'ArrowLeft') lightboxNav(-1);
         });
     </script>
 </body>
