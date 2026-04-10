@@ -5,657 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sumit Tiruwa — Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --bg: #0a0a0f;
-            --bg2: #111118;
-            --bg3: #16161f;
-            --surface: #1c1c28;
-            --border: rgba(255,255,255,0.07);
-            --border-hover: rgba(255,255,255,0.15);
-            --accent: #c8f56a;
-            --accent2: #7c6af5;
-            --accent3: #f56a6a;
-            --text: #f0ede8;
-            --text-muted: #7a7888;
-            --text-dim: #4a4860;
-            --card: #13131c;
-            --card-hover: #1a1a28;
-            --glow: rgba(200,245,106,0.15);
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Outfit', sans-serif;
-            font-weight: 300;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* ── Grain overlay ── */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.4;
-        }
-
-        /* ── Nav ── */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 4rem;
-            height: 72px;
-            background: rgba(10,10,15,0.85);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--accent);
-            letter-spacing: -1px;
-        }
-
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--accent); }
-
-        .nav-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--text-muted);
-        }
-        .nav-dot {
-            width: 7px; height: 7px;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 8px var(--accent);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-
-        /* ── Hamburger ── */
-        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-        .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--text); transition: all 0.3s; }
-        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            inset: 72px 0 0;
-            background: rgba(10,10,15,0.97);
-            z-index: 99;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2.5rem;
-        }
-        .mobile-menu.open { display: flex; }
-        .mobile-menu a {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 700;
-        }
-        .mobile-menu a:hover { color: var(--accent); }
-
-        /* ── Section base ── */
-        section { padding: 120px 4rem; max-width: 1200px; margin: 0 auto; }
-
-        .section-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--accent);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-        }
-
-        /* ── Reveal ── */
-        .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-        .reveal.in { opacity: 1; transform: none; }
-
-        /* ── HERO ── */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 72px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: 4rem;
-            padding-right: 4rem;
-        }
-
-        .hero-layout {
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 5rem;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent);
-            border: 1px solid rgba(200,245,106,0.3);
-            padding: 0.4rem 1rem;
-            border-radius: 100px;
-            margin-bottom: 2rem;
-            letter-spacing: 0.05em;
-        }
-        .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 2s infinite; }
-
-        .hero-name {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(4rem, 9vw, 7rem);
-            font-weight: 900;
-            line-height: 0.95;
-            letter-spacing: -0.04em;
-            margin-bottom: 1.5rem;
-        }
-        .hero-name .line2 {
-            display: block;
-            color: transparent;
-            -webkit-text-stroke: 1.5px var(--text);
-        }
-
-        .hero-sub {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 480px;
-            line-height: 1.8;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: var(--accent);
-            color: #0a0a0f;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 0.8rem 1.8rem;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: all 0.25s;
-            letter-spacing: 0.02em;
-        }
-        .btn-primary:hover { background: #d8ff7a; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(200,245,106,0.3); }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.8rem 1.8rem;
-            border: 1px solid var(--border-hover);
-            border-radius: 6px;
-            color: var(--text);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.25s;
-        }
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-        /* ── Hero photo ── */
-       /* Container for the photo */
-.hero-photo-wrap {
-    position: relative;
-    width: 200px;        /* smaller width */
-    margin: 0 auto;      /* center horizontally */
-}
-
-/* Gradient border behind photo */
-.hero-photo-wrap::before {
-    content: '';
-    position: absolute;
-    inset: -3px;                 /* slightly larger than image */
-    border-radius: 20px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2), transparent);
-    z-index: 0;
-}
-
-/* Photo itself */
-.hero-photo-wrap img,
-.photo-placeholder {
-    position: relative;
-    z-index: 1;
-    width: 100%;             /* fill container width */
-    aspect-ratio: 3 / 4;     /* keep ratio */
-    border-radius: 18px;     /* slightly smaller than border */
-    object-fit: cover;
-    display: block;
-}
-
-/* Placeholder if no image */
-.photo-placeholder {
-    background: var(--surface);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: var(--text-dim);
-    font-size: 0.8rem;
-}
-
-/* Scroll hint text (optional) */
-.hero-scroll-hint {
-    position: absolute;
-    bottom: -2rem;           /* closer to photo */
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-/* Small line in scroll hint */
-.scroll-line {
-    width: 30px;            /* smaller line */
-    height: 1px;
-    background: var(--text-dim);
-}
-
-        /* ── ABOUT ── */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 5rem;
-            align-items: start;
-        }
-        .about-text p {
-            color: var(--text-muted);
-            margin-bottom: 1.2rem;
-            line-height: 1.9;
-        }
-        .about-text strong { color: var(--text); font-weight: 500; }
-
-        .info-cards { display: flex; flex-direction: column; gap: 0.75rem; }
-        .info-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1rem 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: border-color 0.2s, background 0.2s;
-        }
-        .info-card:hover { border-color: var(--border-hover); background: var(--card-hover); }
-        .info-card-icon { font-size: 1.2rem; }
-        .info-card-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.15rem;
-        }
-        .info-card-value { font-size: 0.9rem; color: var(--text); }
-        .info-card-value a { color: var(--accent); text-decoration: none; }
-        .info-card-value a:hover { text-decoration: underline; }
-
-        /* ── SKILLS ── */
-        #skills { background: none; }
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 0.85rem;
-            margin-top: 3rem;
-        }
-        .skill-item {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.2rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            transition: all 0.25s;
-            cursor: default;
-        }
-        .skill-item:hover {
-            border-color: var(--accent);
-            background: var(--card-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 32px rgba(200,245,106,0.08);
-        }
-        .skill-icon { font-size: 1.3rem; }
-        .skill-name { font-size: 0.88rem; font-weight: 500; }
-        .skill-type { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-dim); }
-
-        /* ── PROJECTS ── */
-        #projects { background: none; }
-        .projects-grid { display: flex; flex-direction: column; gap: 2rem; margin-top: 3rem; }
-
-        .project-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .project-card:hover {
-            border-color: var(--border-hover);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-        }
-
-        .project-top {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 1.5rem;
-            margin-bottom: 1.2rem;
-        }
-        .project-top-left { display: flex; align-items: flex-start; gap: 1rem; flex: 1; }
-        .project-icon {
-            font-size: 1.5rem;
-            width: 48px; height: 48px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-        }
-        .project-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
-        .project-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
-        .project-desc strong { color: var(--text); font-weight: 500; }
-
-        .project-link {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent);
-            text-decoration: none;
-            border: 1px solid rgba(200,245,106,0.3);
-            padding: 0.4rem 0.9rem;
-            border-radius: 6px;
-            white-space: nowrap;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-        .project-link:hover { background: rgba(200,245,106,0.1); border-color: var(--accent); }
-
-        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-        .project-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            color: var(--text-dim);
-            border: 1px solid var(--border);
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-            letter-spacing: 0.04em;
-        }
-
-        /* ── Gallery ── */
-        .project-gallery { margin-top: 0; }
-        .gallery-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .gallery-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 0.6rem;
-        }
-
-        .gallery-slot {
-            position: relative;
-            aspect-ratio: 16/10;
-            border-radius: 8px;
-            overflow: hidden;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.25s;
-        }
-        .gallery-slot:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-
-        .slot-img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-        .gallery-slot:hover .slot-img { transform: scale(1.05); }
-
-        .slot-caption {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 0.5rem 0.6rem 0.4rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.85));
-            display: none;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .slot-num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.58rem;
-            color: var(--accent);
-        }
-        .slot-label { font-size: 0.7rem; color: var(--text); font-weight: 500; }
-
-        .slot-empty-state {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.25rem;
-        }
-        .slot-empty-state .slot-num { color: var(--text-dim); font-size: 0.65rem; }
-        .slot-empty-state .slot-label { color: var(--text-dim); font-size: 0.68rem; }
-
-        /* Slot placeholder pattern */
-        .slot-empty-state::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 0, transparent 50%);
-            background-size: 10px 10px;
-        }
-
-        /* ── Lightbox ── */
-        .lightbox {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.94);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(12px);
-        }
-        .lightbox.open { display: flex; }
-        .lightbox-inner { max-width: 88vw; max-height: 88vh; }
-        .lightbox-img { max-width: 88vw; max-height: 80vh; object-fit: contain; border-radius: 8px; display: block; }
-        .lightbox-close {
-            position: absolute;
-            top: 1.5rem; right: 2rem;
-            background: none; border: none;
-            font-size: 1.5rem; color: var(--text-muted);
-            cursor: pointer; transition: color 0.2s;
-            z-index: 10;
-        }
-        .lightbox-close:hover { color: var(--text); }
-        .lightbox-nav {
-            position: absolute;
-            top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            color: var(--text);
-            width: 48px; height: 48px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s;
-        }
-        .lightbox-nav:hover { background: rgba(255,255,255,0.12); border-color: var(--accent); color: var(--accent); }
-        .lightbox-prev { left: 2rem; }
-        .lightbox-next { right: 2rem; }
-        .lightbox-caption {
-            position: absolute;
-            bottom: 2rem; left: 50%;
-            transform: translateX(-50%);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 0.08em;
-        }
-
-        /* ── CONTACT ── */
-        .contact-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-        .contact-inner > div:first-child p { color: var(--text-muted); margin-bottom: 2rem; }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.2rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            text-decoration: none;
-            color: var(--text);
-            margin-bottom: 0.75rem;
-            transition: all 0.2s;
-        }
-        .contact-link:hover { border-color: var(--accent); background: var(--card-hover); transform: translateX(4px); }
-        .contact-link-icon { font-size: 1.1rem; }
-        .contact-link-info { flex: 1; }
-        .contact-link-info .label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
-        .contact-link-info .value { font-size: 0.9rem; }
-        .contact-link-arrow { color: var(--text-dim); transition: color 0.2s; }
-        .contact-link:hover .contact-link-arrow { color: var(--accent); }
-
-        .big-cta {
-            background: linear-gradient(135deg, var(--surface) 0%, #1a1a2e 100%);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-        }
-        .big-cta h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        .big-cta p { color: var(--text-muted); margin-bottom: 2rem; }
-
-        /* ── Footer ── */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 2rem 4rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 100%;
-        }
-        .footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: var(--accent);
-        }
-        .footer-copy { font-size: 0.82rem; color: var(--text-dim); }
-        .footer-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--text-muted);
-        }
-        .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
-
-        /* ── Responsive ── */
-        @media (max-width: 900px) {
-            nav { padding: 0 1.5rem; }
-            .nav-links, .nav-status { display: none; }
-            .hamburger { display: flex; }
-            section { padding: 80px 1.5rem; }
-            #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
-            .hero-layout { grid-template-columns: 1fr; gap: 3rem; }
-            .hero-photo-wrap { max-width: 280px; margin: 0 auto; }
-            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-            .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-            footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
-        }
-        @media (max-width: 600px) {
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .project-top { flex-direction: column; gap: 0.75rem; }
-            .project-link { align-self: flex-start; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -781,6 +131,10 @@
             <div class="skill-item"><div class="skill-icon">🌊</div><div><div class="skill-name">Tailwind CSS</div><div class="skill-type">CSS Framework</div></div></div>
             <div class="skill-item"><div class="skill-icon">🅱️</div><div><div class="skill-name">Bootstrap</div><div class="skill-type">CSS Framework</div></div></div>
             <div class="skill-item"><div class="skill-icon">🎨</div><div><div class="skill-name">UI / UX</div><div class="skill-type">Design</div></div></div>
+            <!-- CCNA / Networking Skills -->
+            <div class="skill-item"><div class="skill-icon">🌐</div><div><div class="skill-name">CCNA</div><div class="skill-type">Networking</div></div></div>
+            <div class="skill-item"><div class="skill-icon">🖧</div><div><div class="skill-name">Cisco Packet Tracer</div><div class="skill-type">Network Simulation</div></div></div>
+            <div class="skill-item"><div class="skill-icon">🦈</div><div><div class="skill-name">Wireshark</div><div class="skill-type">Packet Analysis</div></div></div>
         </div>
     </section>
 
@@ -789,6 +143,84 @@
         <div class="section-label">03 — Projects</div>
         <h2 class="section-title reveal">Selected Work</h2>
         <div class="projects-grid">
+
+
+            <!-- Car Rental System (Wheels) -->
+
+             <div class="project-card reveal">
+                <div class="project-top">
+                    <div class="project-top-left">
+                        <div class="project-icon">🚗</div>
+                        <div class="project-meta">
+                            <div class="project-name"> Rental System (Car Rental)</div>
+                            <div class="project-desc">A car rental system with vehicle browsing, booking management, and <strong>Khalti</strong> payment gateway integration. Built with <strong>PHP</strong>, <strong>JavaScript</strong>, and <strong>Bootstrap</strong> for a smooth rental experience.</div>
+                        </div>
+                    </div>
+                    <a href="https://github.com/sumittiruwa/wheels" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
+                </div>
+                <div class="project-tags">
+                    <span class="project-tag">PHP</span>
+                    <span class="project-tag">JavaScript</span>
+                    <span class="project-tag">Bootstrap</span>
+                    <span class="project-tag">Khalti Payment</span>
+                    <span class="project-tag">MySQL</span>
+                </div>
+                <div class="project-gallery">
+                    <div class="gallery-label">Interface Preview</div>
+                    <div class="gallery-grid">
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/homepage.png" alt="Homepage" data-label="Homepage"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/Dashboard.png" alt="Fleet" data-label="Fleet"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/CarList.png" alt="Booking" data-label="Booking"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Booking</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Booking</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/Home.png" alt="Payment" data-label="Payment"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Payment</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Payment</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/Picture2.png" alt="My Bookings" data-label="My Bookings"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <!-- weather_React_Web -->
+             <div class="project-card reveal">
+    <div class="project-top">
+        <div class="project-top-left">
+            <div class="project-icon">☀️</div>
+            <div class="project-meta">
+                <div class="project-name">Weather Forecast App</div>
+                <div class="project-desc">
+                    A React-based weather forecast application that displays current weather and a 5-day forecast. Features city search, dynamic backgrounds, and responsive design.
+                </div>
+            </div>
+        </div>
+        <a href="https://github.com/sumittiruwa/WeatherForecast" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
+    </div>
+    <div class="project-tags">
+        <span class="project-tag">React</span>
+        <span class="project-tag">JavaScript</span>
+        <span class="project-tag">CSS</span>
+        <span class="project-tag">API</span>
+        <span class="project-tag">Weather App</span>
+    </div>
+    <div class="project-gallery">
+        <div class="gallery-label">Interface Preview</div>
+        <div class="gallery-grid">
+            <div class="gallery-slot" onclick="slotClick(this)">
+                <img class="slot-img" src="Img/Weather/Home.png" alt="Homepage" data-label="Homepage">
+                <div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
+                <div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
+            </div>
+            <div class="gallery-slot" onclick="slotClick(this)">
+                <img class="slot-img" src="Img/Weather/day.png" alt="City Search" data-label="City Search">
+                <div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">City Search</span></div>
+                <div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">City Search</span></div>
+            </div>
+            <div class="gallery-slot" onclick="slotClick(this)">
+                <img class="slot-img" src="Img/Weather/search.png" alt="Forecast" data-label="Forecast">
+                <div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Search</span></div>
+                <div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Forecast</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+             
 
             <!-- Sports Shop -->
             <div class="project-card reveal">
@@ -878,11 +310,11 @@
                 <div class="project-gallery">
                     <div class="gallery-label">Interface Preview</div>
                     <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Home" data-label="Home"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Home</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Home</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Browse" data-label="Browse"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Browse</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Browse</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Player" data-label="Player"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Player</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Player</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Payment" data-label="Payment"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Payment</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Payment</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Recommendations" data-label="Recommendations"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Recommendations</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Recommendations</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/Home.png" alt="Home" data-label="Home"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Home</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Home</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/dasshboard.png" alt="Browse" data-label="Browse"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Browse</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Browse</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/Category.png" alt="Player" data-label="Player"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Player</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Player</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/plan.png" alt="Payment" data-label="Payment"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Payment</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Payment</span></div></div>
+                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/Profle.png" alt="Recommendations" data-label="Recommendations"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Recommendations</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Recommendations</span></div></div>
                     </div>
                 </div>
             </div>
@@ -917,38 +349,41 @@
                 </div>
             </div>
 
-            <!-- Wheels Car Rental -->
+            <!-- DHCP and VLAN Configuration Lab -->
             <div class="project-card reveal">
                 <div class="project-top">
                     <div class="project-top-left">
-                        <div class="project-icon">🚗</div>
+                        <div class="project-icon">🌐</div>
                         <div class="project-meta">
-                            <div class="project-name"> Rental System (Car Rental)</div>
-                            <div class="project-desc">A car rental system with vehicle browsing, booking management, and <strong>Khalti</strong> payment gateway integration. Built with <strong>PHP</strong>, <strong>JavaScript</strong>, and <strong>Bootstrap</strong> for a smooth rental experience.</div>
+                            <div class="project-name">DHCP and VLAN Configuration Lab</div>
+                            <div class="project-desc">Designed and simulated an enterprise-level network with multiple VLANs and automated IP assignment via <strong>DHCP servers</strong>. Configured <strong>inter-VLAN routing</strong> to enable cross-VLAN communication and verified traffic flow using <strong>Wireshark</strong> packet capture.</div>
                         </div>
                     </div>
-                    <a href="https://github.com/sumittiruwa/wheels" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
                 </div>
                 <div class="project-tags">
-                    <span class="project-tag">PHP</span>
-                    <span class="project-tag">JavaScript</span>
-                    <span class="project-tag">Bootstrap</span>
-                    <span class="project-tag">Khalti Payment</span>
-                    <span class="project-tag">MySQL</span>
+                    <span class="project-tag">CCNA</span>
+                    <span class="project-tag">Cisco Packet Tracer</span>
+                    <span class="project-tag">Wireshark</span>
+                    <span class="project-tag">VLAN</span>
+                    <span class="project-tag">DHCP</span>
+                    <span class="project-tag">Inter-VLAN Routing</span>
+                    <span class="project-tag">Network Lab</span>
                 </div>
                 <div class="project-gallery">
-                    <div class="gallery-label">Interface Preview</div>
+                    <div class="gallery-label">Lab Highlights</div>
                     <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Homepage" data-label="Homepage"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Fleet" data-label="Fleet"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Booking" data-label="Booking"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Booking</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Booking</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Payment" data-label="Payment"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Payment</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Payment</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="My Bookings" data-label="My Bookings"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div></div>
+                        <div class="gallery-slot" style="cursor:default;"><img class="slot-img" src="" alt="Topology" data-label="Topology"><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Topology</span></div></div>
+                        <div class="gallery-slot" style="cursor:default;"><img class="slot-img" src="" alt="VLAN Config" data-label="VLAN Config"><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">VLAN Config</span></div></div>
+                        <div class="gallery-slot" style="cursor:default;"><img class="slot-img" src="" alt="DHCP Setup" data-label="DHCP Setup"><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">DHCP Setup</span></div></div>
+                        <div class="gallery-slot" style="cursor:default;"><img class="slot-img" src="" alt="Wireshark Capture" data-label="Wireshark Capture"><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Wireshark Capture</span></div></div>
                     </div>
+                </div>
+                <!-- Outcome banner -->
+                <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(var(--accent-rgb,99,102,241),0.08); border-left:3px solid var(--accent,#6366f1); border-radius:0 6px 6px 0; font-size:0.82rem; color:var(--text-muted,#888);">
+                    ✅ <strong>Outcome:</strong> Successfully simulated enterprise-level connectivity; confirmed correct traffic routing and IP assignment via Wireshark packet capture.
                 </div>
             </div>
 
-        </div>
     </section>
 
     <!-- ── CONTACT ── -->
