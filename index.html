@@ -4,21 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sumit Tiruwa — Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
 </head>
 <body>
-
-    <!-- ── Lightbox ── -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-        <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">‹</button>
-        <div class="lightbox-inner">
-            <img class="lightbox-img" id="lightboxImg" src="" alt="">
-        </div>
-        <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">›</button>
-        <div class="lightbox-caption" id="lightboxCaption"></div>
-    </div>
 
     <!-- ── Mobile menu ── -->
     <div class="mobile-menu" id="mobileMenu">
@@ -47,27 +39,31 @@
 
     <!-- ── HERO ── -->
     <section id="hero">
-        <div class="hero-layout">
-            <div class="hero-left">
-                <div class="hero-tag"><span class="dot"></span> Available for opportunities</div>
-                <h1 class="hero-name">Sumit<span class="line2">Tiruwa.</span></h1>
-                <p class="hero-sub">BCA student & full-stack enthusiast building scalable web applications. Passionate about clean code, modern tooling, and great user experiences.</p>
+        <div class="hero-inner">
+            <div>
+                <div class="hero-eyebrow"><span class="dot"></span> Available for opportunities</div>
+                <h1 class="hero-name">Sumit<br><em>Tiruwa.</em></h1>
+                <p class="hero-bio">BCA student & full-stack developer building scalable, thoughtfully crafted web applications. I believe good software is equal parts logic and design sensibility.</p>
                 <div class="hero-ctas">
                     <a href="#projects" class="btn-primary">View Projects ↗</a>
                     <a href="#contact" class="btn-outline">Get in Touch</a>
                 </div>
-                <div class="hero-scroll-hint"><div class="scroll-line"></div>Scroll to explore</div>
             </div>
             <div class="hero-photo-wrap">
-                <img src="profile.jpeg" alt="Sumit Tiruwa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="profile.jpeg" alt="Sumit Tiruwa"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="photo-placeholder" style="display:none;">
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                        <circle cx="30" cy="21" r="11" stroke="#4a4860" stroke-width="2"/>
-                        <path d="M6 54c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="#4a4860" stroke-width="2" stroke-linecap="round"/>
+                    <svg width="48" height="48" viewBox="0 0 60 60" fill="none">
+                        <circle cx="30" cy="21" r="11" stroke="#4a4845" stroke-width="1.5"/>
+                        <path d="M6 54c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="#4a4845" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
-                    <span>Your photo here</span>
+                    <span style="font-size:0.72rem;color:var(--text-dim);">photo here</span>
                 </div>
             </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="hero-scroll-line"></div>
+            scroll
         </div>
     </section>
 
@@ -76,10 +72,23 @@
         <div class="section-label">01 — About</div>
         <div class="about-grid reveal">
             <div class="about-text">
-                <h2 class="section-title">The person<br>behind the code.</h2>
-                <p>I'm <strong>Sumit Tiruwa</strong>, a BCA student with a deep passion for full-stack development. I enjoy turning ideas into functional, well-crafted digital products.</p>
-                <p>My workflow spans from designing backend systems with <strong>Laravel & PHP</strong> to building reactive frontends with <strong>React & JavaScript</strong>. I'm comfortable containerizing with <strong>Docker</strong>, managing projects in <strong>Jira</strong>, and shipping with <strong>Git</strong>.</p>
-                <p>When I'm not coding, I'm exploring new frameworks, contributing to projects, and leveling up my engineering skills.</p>
+               <h2 class="section-title">The person<br>behind the code.</h2>
+
+<p>
+    I'm <strong>Sumit Tiruwa</strong>, a <em>BCA student</em> who enjoys building websites and learning new technologies.
+</p>
+
+<p>
+    I work with <strong>PHP (Laravel)</strong> on the backend and <strong>JavaScript (React)</strong> on the frontend, creating simple and user-friendly applications.
+</p>
+
+<p>
+    I have developed projects like e-commerce websites and other academic systems, which helped me understand real-world development.
+</p>
+
+<p>
+    I'm currently looking for <strong>internships and opportunities</strong> to grow my skills and gain experience.
+</p>
             </div>
             <div class="info-cards">
                 <div class="info-card">
@@ -104,10 +113,17 @@
                     </div>
                 </div>
                 <div class="info-card">
+                    <div class="info-card-icon">📍</div>
+                    <div>
+                        <div class="info-card-label">Location</div>
+                        <div class="info-card-value">Kathmandu, Nepal</div>
+                    </div>
+                </div>
+                <div class="info-card">
                     <div class="info-card-icon">🐙</div>
                     <div>
                         <div class="info-card-label">GitHub</div>
-                        <div class="info-card-value"><a href="https://github.com/sumittiruwa/" target="_blank">sumittiruwa</a></div>
+                        <div class="info-card-value"><a href="https://github.com/sumittiruwa/" target="_blank">github.com/sumittiruwa</a></div>
                     </div>
                 </div>
             </div>
@@ -131,10 +147,6 @@
             <div class="skill-item"><div class="skill-icon">🌊</div><div><div class="skill-name">Tailwind CSS</div><div class="skill-type">CSS Framework</div></div></div>
             <div class="skill-item"><div class="skill-icon">🅱️</div><div><div class="skill-name">Bootstrap</div><div class="skill-type">CSS Framework</div></div></div>
             <div class="skill-item"><div class="skill-icon">🎨</div><div><div class="skill-name">UI / UX</div><div class="skill-type">Design</div></div></div>
-            <!-- CCNA / Networking Skills -->
-            <div class="skill-item"><div class="skill-icon">🌐</div><div><div class="skill-name">CCNA</div><div class="skill-type">Networking</div></div></div>
-            <div class="skill-item"><div class="skill-icon">🖧</div><div><div class="skill-name">Cisco Packet Tracer</div><div class="skill-type">Network Simulation</div></div></div>
-            <div class="skill-item"><div class="skill-icon">🦈</div><div><div class="skill-name">Wireshark</div><div class="skill-type">Packet Analysis</div></div></div>
         </div>
     </section>
 
@@ -142,277 +154,205 @@
     <section id="projects">
         <div class="section-label">03 — Projects</div>
         <h2 class="section-title reveal">Selected Work</h2>
-        <div class="projects-grid">
 
+        <div class="projects-list">
 
-            <!-- Car Rental System (Wheels) -->
-
-             <div class="project-card reveal">
-                <div class="project-top">
-                    <div class="project-top-left">
-                        <div class="project-icon">🚗</div>
-                        <div class="project-meta">
-                            <div class="project-name"> Rental System (Car Rental)</div>
-                            <div class="project-desc">A car rental system with vehicle browsing, booking management, and <strong>Khalti</strong> payment gateway integration. Built with <strong>PHP</strong>, <strong>JavaScript</strong>, and <strong>Bootstrap</strong> for a smooth rental experience.</div>
-                        </div>
-                    </div>
-                    <a href="https://github.com/sumittiruwa/wheels" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
-                </div>
-                <div class="project-tags">
-                    <span class="project-tag">PHP</span>
-                    <span class="project-tag">JavaScript</span>
-                    <span class="project-tag">Bootstrap</span>
-                    <span class="project-tag">Khalti Payment</span>
-                    <span class="project-tag">MySQL</span>
-                </div>
-                <div class="project-gallery">
-                    <div class="gallery-label">Interface Preview</div>
-                    <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/homepage.png" alt="Homepage" data-label="Homepage"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/Dashboard.png" alt="Fleet" data-label="Fleet"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Fleet</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/CarList.png" alt="Booking" data-label="Booking"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Booking</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Booking</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/Home.png" alt="Payment" data-label="Payment"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Payment</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Payment</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/CarRental/Picture2.png" alt="My Bookings" data-label="My Bookings"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">My Bookings</span></div></div>
+            <!-- Car Rental -->
+            <div class="project-item reveal">
+                <div class="project-num">01</div>
+                <div class="project-body">
+                    <div class="project-title">Car Rental System</div>
+                    <p class="project-desc">A full-featured car rental platform with vehicle browsing, booking management, and <strong>Khalti</strong> payment gateway integration. Built with PHP and Bootstrap for a smooth end-to-end rental experience — from fleet listing to confirmed payment.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">Bootstrap</span>
+                        <span class="project-tag">Khalti API</span>
+                        <span class="project-tag">MySQL</span>
                     </div>
                 </div>
+                <div class="project-links">
+                    <a href="https://github.com/sumittiruwa/wheels" target="_blank" class="project-link">GitHub ↗</a>
+                    <a href="http://moviematch.rf.gd/wheels/index.php" target="_blank" class="project-link">Live Demo ↗</a>
+                </div>
             </div>
 
-        </div>
-            <!-- weather_React_Web -->
-             <div class="project-card reveal">
-    <div class="project-top">
-        <div class="project-top-left">
-            <div class="project-icon">☀️</div>
-            <div class="project-meta">
-                <div class="project-name">Weather Forecast App</div>
-                <div class="project-desc">
-                    A React-based weather forecast application that displays current weather and a 5-day forecast. Features city search, dynamic backgrounds, and responsive design.
+            <!-- Weather App -->
+            <div class="project-item reveal">
+                <div class="project-num">02</div>
+                <div class="project-body">
+                    <div class="project-title">Weather Forecast App</div>
+                    <p class="project-desc">A React-based weather forecast application displaying current conditions and a 5-day outlook. Features include city search, dynamic background themes that shift with weather conditions, and a fully responsive layout optimised for mobile.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">CSS</span>
+                        <span class="project-tag">Weather API</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/sumittiruwa/WeatherForecast" target="_blank" class="project-link">GitHub ↗</a>
                 </div>
             </div>
-        </div>
-        <a href="https://github.com/sumittiruwa/WeatherForecast" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
-    </div>
-    <div class="project-tags">
-        <span class="project-tag">React</span>
-        <span class="project-tag">JavaScript</span>
-        <span class="project-tag">CSS</span>
-        <span class="project-tag">API</span>
-        <span class="project-tag">Weather App</span>
-    </div>
-    <div class="project-gallery">
-        <div class="gallery-label">Interface Preview</div>
-        <div class="gallery-grid">
-            <div class="gallery-slot" onclick="slotClick(this)">
-                <img class="slot-img" src="Img/Weather/Home.png" alt="Homepage" data-label="Homepage">
-                <div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
-                <div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div>
-            </div>
-            <div class="gallery-slot" onclick="slotClick(this)">
-                <img class="slot-img" src="Img/Weather/day.png" alt="City Search" data-label="City Search">
-                <div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">City Search</span></div>
-                <div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">City Search</span></div>
-            </div>
-            <div class="gallery-slot" onclick="slotClick(this)">
-                <img class="slot-img" src="Img/Weather/search.png" alt="Forecast" data-label="Forecast">
-                <div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Search</span></div>
-                <div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Forecast</span></div>
-            </div>
-        </div>
-    </div>
-</div>
-             
 
-            <!-- Sports Shop -->
-            <div class="project-card reveal">
-                <div class="project-top">
-                    <div class="project-top-left">
-                        <div class="project-icon">👟</div>
-                        <div class="project-meta">
-                            <div class="project-name">E-Commerce (Sports Shop )</div>
-                            <div class="project-desc">A full-featured sports equipment e-commerce platform built as a 4th semester project. Features product listings, cart management, user authentication, order tracking, and an admin dashboard for inventory management.</div>
-                        </div>
+            <!-- Sports E-Commerce -->
+            <div class="project-item reveal">
+                <div class="project-num">03</div>
+                <div class="project-body">
+                    <div class="project-title">Sports E-Commerce Platform</div>
+                    <p class="project-desc">A full-featured sports equipment store built as a 4th semester project. Includes product listings with category filtering, a shopping cart, user authentication, order tracking, and an admin dashboard for complete inventory management.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">Laravel</span>
+                        <span class="project-tag">Bootstrap</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">MySQL</span>
                     </div>
-                    <a href="https://github.com/sumittiruwa/Sports_shop_E-commerce" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
                 </div>
-                <div class="project-tags">
-                    <span class="project-tag">PHP</span>
-                    <span class="project-tag">Laravel</span>
-                    <span class="project-tag">Bootstrap</span>
-                    <span class="project-tag">JavaScript</span>
-                    <span class="project-tag">MySQL</span>
-                    <span class="project-tag">4th Sem Project</span>
-                </div>
-                <div class="project-gallery">
-                    <div class="gallery-label">Interface Preview</div>
-                    <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Homepage" data-label="Homepage"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Homepage</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Products" data-label="Products"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Products</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Products</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Cart" data-label="Cart"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Cart</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Cart</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Orders" data-label="Orders"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Orders</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Orders</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="" alt="Admin" data-label="Admin"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Admin</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Admin</span></div></div>
-                    </div>
+                <div class="project-links">
+                    <a href="https://github.com/sumittiruwa/Sports_shop_E-commerce" target="_blank" class="project-link">GitHub ↗</a>
+                    <a href="http://moviematch.rf.gd/sports/" target="_blank" class="project-link">Live Demo ↗</a>
                 </div>
             </div>
 
             <!-- Real-Time Chat -->
-            <div class="project-card reveal">
-                <div class="project-top">
-                    <div class="project-top-left">
-                        <div class="project-icon">💬</div>
-                        <div class="project-meta">
-                            <div class="project-name">Real-Time Chatting (Dating)</div>
-                            <div class="project-desc">A responsive real-time chat application. Users can send instant messages, view online/offline status, manage profiles, and receive unread message notifications — all in a sleek, mobile-friendly interface.</div>
-                        </div>
+            <div class="project-item reveal">
+                <div class="project-num">04</div>
+                <div class="project-body">
+                    <div class="project-title">Real-Time Chat Application</div>
+                    <p class="project-desc">A responsive real-time messaging app built on WebSockets and Node.js. Users can send instant messages, see live online/offline status, manage profiles, and receive unread notification badges — all in a clean, mobile-friendly interface.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">WebSockets</span>
+                        <span class="project-tag">MySQL</span>
+                        <span class="project-tag">Bootstrap</span>
                     </div>
-                    <a href="https://github.com/sumittiruwa/Real_Time_chatting_App_" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
                 </div>
-                <div class="project-tags">
-                    <span class="project-tag">Node.js</span>
-                    <span class="project-tag">PHP</span>
-                    <span class="project-tag">MySQL</span>
-                    <span class="project-tag">WebSockets</span>
-                    <span class="project-tag">Bootstrap</span>
-                    <span class="project-tag">Real-Time</span>
-                </div>
-                <div class="project-gallery">
-                    <div class="gallery-label">Interface Preview</div>
-                    <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/homepage.png" alt="Chat UI" data-label="Chat UI"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Home Page</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Chat UI</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/admin.png" alt="Login" data-label="Login"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Admin Panel</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Login</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/livechat.png" alt="Contacts" data-label="Contacts"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Live Chat </span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Contacts</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/userdashboard.png" alt="Profile" data-label="Profile"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">User dashboard</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Profile</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/notification.png" alt="Notifications" data-label="Notifications"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Notifications</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Notifications</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="RealTimeChat/userprofile.png" alt="Mobile" data-label="Mobile"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Mobile</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Profile</span></div></div>
-                    </div>
+                <div class="project-links">
+                    <a href="https://github.com/sumittiruwa/Real_Time_chatting_App_" target="_blank" class="project-link">GitHub ↗</a>
                 </div>
             </div>
 
             <!-- Netflix Clone -->
-            <div class="project-card reveal">
-                <div class="project-top">
-                    <div class="project-top-left">
-                        <div class="project-icon">🎬</div>
-                        <div class="project-meta">
-                            <div class="project-name">Movie Recommendation (Netflix Clone)</div>
-                            <div class="project-desc">A Netflix-inspired streaming platform integrating <strong>Google API</strong> and <strong>YouTube API</strong> for content discovery, <strong>Stripe</strong> for secure payment processing, and custom recommendation algorithms for personalized viewing.</div>
-                        </div>
+            <div class="project-item reveal">
+                <div class="project-num">05</div>
+                <div class="project-body">
+                    <div class="project-title">Movie Recommendation Platform</div>
+                    <p class="project-desc">A Netflix-inspired streaming discovery platform integrating the Google API and YouTube API for content browsing, Stripe for secure subscription payments, and a custom recommendation algorithm for personalised viewing suggestions.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Laravel</span>
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">Google API</span>
+                        <span class="project-tag">YouTube API</span>
+                        <span class="project-tag">Stripe</span>
                     </div>
-                    <a href="https://github.com/sumittiruwa/Netflix-clone" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
                 </div>
-                <div class="project-tags">
-                    <span class="project-tag">Laravel</span>
-                    <span class="project-tag">PHP</span>
-                    <span class="project-tag">Google API</span>
-                    <span class="project-tag">YouTube API</span>
-                    <span class="project-tag">Stripe</span>
-                    <span class="project-tag">Algorithm</span>
-                </div>
-                <div class="project-gallery">
-                    <div class="gallery-label">Interface Preview</div>
-                    <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/Home.png" alt="Home" data-label="Home"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Home</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Home</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/dasshboard.png" alt="Browse" data-label="Browse"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Browse</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Browse</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/Category.png" alt="Player" data-label="Player"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Player</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Player</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/plan.png" alt="Payment" data-label="Payment"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Payment</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Payment</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/movieRecommendation/Profle.png" alt="Recommendations" data-label="Recommendations"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Recommendations</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Recommendations</span></div></div>
-                    </div>
+                <div class="project-links">
+                    <a href="https://github.com/sumittiruwa/Netflix-clone" target="_blank" class="project-link">GitHub ↗</a>
                 </div>
             </div>
 
             <!-- Inventory System -->
-            <div class="project-card reveal">
-                <div class="project-top">
-                    <div class="project-top-left">
-                        <div class="project-icon">📦</div>
-                        <div class="project-meta">
-                            <div class="project-name">Inventory Management System (Shop Management)</div>
-                            <div class="project-desc">A comprehensive inventory management system for tracking stock, orders, and suppliers. Built with <strong>PHP</strong> for the backend, <strong>Bootstrap</strong> for a responsive UI, and <strong>JavaScript</strong> for dynamic interactions.</div>
-                        </div>
+            <div class="project-item reveal">
+                <div class="project-num">06</div>
+                <div class="project-body">
+                    <div class="project-title">Inventory Management System</div>
+                    <p class="project-desc">A comprehensive shop management tool for tracking stock levels, supplier relationships, and orders in real time. Built with a PHP backend, Bootstrap UI, and JavaScript for dynamic interactions including low-stock alerts and sales reporting.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">Bootstrap</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">MySQL</span>
                     </div>
-                    <a href="https://github.com/sumittiruwa/Inventory_System" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
                 </div>
-                <div class="project-tags">
-                    <span class="project-tag">PHP</span>
-                    <span class="project-tag">Bootstrap</span>
-                    <span class="project-tag">JavaScript</span>
-                    <span class="project-tag">MySQL</span>
-                </div>
-                <div class="project-gallery">
-                    <div class="gallery-label">Interface Preview</div>
-                    <div class="gallery-grid">
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="Img/Inventory/1.png" alt="Dashboard" data-label="Dashboard"><div class="slot-caption"><span class="slot-num">01</span><span class="slot-label">Dashboard</span></div><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Dashboard</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="stock.jpeg" alt="Stock" data-label="Stock"><div class="slot-caption"><span class="slot-num">02</span><span class="slot-label">Stock</span></div><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">Stock</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="orders.jpeg" alt="Orders" data-label="Orders"><div class="slot-caption"><span class="slot-num">03</span><span class="slot-label">Orders</span></div><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">Orders</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="suppliers.jpeg" alt="Suppliers" data-label="Suppliers"><div class="slot-caption"><span class="slot-num">04</span><span class="slot-label">Suppliers</span></div><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Suppliers</span></div></div>
-                        <div class="gallery-slot" onclick="slotClick(this)"><img class="slot-img" src="reports.jpeg" alt="Reports" data-label="Reports"><div class="slot-caption"><span class="slot-num">05</span><span class="slot-label">Reports</span></div><div class="slot-empty-state"><span class="slot-num">05</span><span class="slot-label">Reports</span></div></div>
-                    </div>
+                <div class="project-links">
+                    <a href="https://github.com/sumittiruwa/Inventory_System" target="_blank" class="project-link">GitHub ↗</a>
                 </div>
             </div>
 
-            <!-- DHCP and VLAN Configuration Lab -->
-            <div class="project-card reveal">
-                <div class="project-top">
-                    <div class="project-top-left">
-                        <div class="project-icon">🌐</div>
-                        <div class="project-meta">
-                            <div class="project-name">DHCP and VLAN Configuration Lab</div>
-                            <div class="project-desc">Designed and simulated an enterprise-level network with multiple VLANs and automated IP assignment via <strong>DHCP servers</strong>. Configured <strong>inter-VLAN routing</strong> to enable cross-VLAN communication and verified traffic flow using <strong>Wireshark</strong> packet capture.</div>
-                        </div>
+            <!-- Portfolio Analyzer -->
+            <div class="project-item reveal">
+                <div class="project-num">07</div>
+                <div class="project-body">
+                    <div class="project-title">Portfolio Analyzer</div>
+                    <p class="project-desc">A tool designed to evaluate and surface insights from developer portfolios. Presents structured analysis with a clean, readable UI focused on clarity and decision support.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">UI/UX</span>
                     </div>
                 </div>
-                <div class="project-tags">
-                    <span class="project-tag">CCNA</span>
-                    <span class="project-tag">Cisco Packet Tracer</span>
-                    <span class="project-tag">Wireshark</span>
-                    <span class="project-tag">VLAN</span>
-                    <span class="project-tag">DHCP</span>
-                    <span class="project-tag">Inter-VLAN Routing</span>
-                    <span class="project-tag">Network Lab</span>
-                </div>
-                <div class="project-gallery">
-                    <div class="gallery-label">Lab Highlights</div>
-                    <div class="gallery-grid">
-                        <div class="gallery-slot" style="cursor:default;"><img class="slot-img" src="" alt="Topology" data-label="Topology"><div class="slot-empty-state"><span class="slot-num">01</span><span class="slot-label">Topology</span></div></div>
-                        <div class="gallery-slot" style="cursor:default;"><img class="slot-img" src="" alt="VLAN Config" data-label="VLAN Config"><div class="slot-empty-state"><span class="slot-num">02</span><span class="slot-label">VLAN Config</span></div></div>
-                        <div class="gallery-slot" style="cursor:default;"><img class="slot-img" src="" alt="DHCP Setup" data-label="DHCP Setup"><div class="slot-empty-state"><span class="slot-num">03</span><span class="slot-label">DHCP Setup</span></div></div>
-                        <div class="gallery-slot" style="cursor:default;"><img class="slot-img" src="" alt="Wireshark Capture" data-label="Wireshark Capture"><div class="slot-empty-state"><span class="slot-num">04</span><span class="slot-label">Wireshark Capture</span></div></div>
-                    </div>
-                </div>
-                <!-- Outcome banner -->
-                <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(var(--accent-rgb,99,102,241),0.08); border-left:3px solid var(--accent,#6366f1); border-radius:0 6px 6px 0; font-size:0.82rem; color:var(--text-muted,#888);">
-                    ✅ <strong>Outcome:</strong> Successfully simulated enterprise-level connectivity; confirmed correct traffic routing and IP assignment via Wireshark packet capture.
+                <div class="project-links">
+                    <a href="http://moviematch.rf.gd/portfolio_analyzer" target="_blank" class="project-link">Live Demo ↗</a>
                 </div>
             </div>
 
+            <!-- VLAN / DHCP Lab -->
+            <!-- <div class="project-item reveal">
+                <div class="project-num">08</div>
+                <div class="project-body">
+                    <div class="project-title">DHCP & VLAN Configuration Lab</div>
+                    <p class="project-desc">Designed and simulated an enterprise-level network topology with multiple VLANs and automated IP assignment via DHCP. Configured inter-VLAN routing for cross-segment communication and verified correct traffic flow using Wireshark packet capture — confirming a working enterprise-grade setup end to end.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">CCNA</span>
+                        <span class="project-tag">Cisco Packet Tracer</span>
+                        <span class="project-tag">Wireshark</span>
+                        <span class="project-tag">VLAN</span>
+                        <span class="project-tag">DHCP</span>
+                        <span class="project-tag">Networking</span>
+                    </div>
+                </div>
+                <div class="project-links"></div>
+            </div> -->
+
+            <!-- Tailwind Cafe UI -->
+            <div class="project-item reveal">
+                <div class="project-num">09</div>
+                <div class="project-body">
+                    <div class="project-title">Tailwind Cafe UI</div>
+                    <p class="project-desc">A modern, fully responsive cafe booking interface built entirely with Tailwind CSS. Demonstrates clean component composition, utility-first design thinking, and attention to visual hierarchy without a JavaScript framework.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Tailwind CSS</span>
+                        <span class="project-tag">HTML</span>
+                        <span class="project-tag">UI Design</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://tailwind-ui-cafe-booking-porject.vercel.app/" target="_blank" class="project-link">Live Demo ↗</a>
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <!-- ── CONTACT ── -->
     <section id="contact">
         <div class="section-label">04 — Contact</div>
         <div class="contact-inner">
-            <div class="reveal">
+            <div class="contact-left reveal">
                 <h2 class="section-title">Let's build<br>something great.</h2>
-                <p>Whether you have a project in mind, a collaboration idea, or just want to connect — my inbox is always open.</p>
+                <p>Whether you have a project in mind, a collaboration idea, or just want to connect — my inbox is always open and I respond promptly.</p>
                 <a href="tel:9813609377" class="contact-link">
                     <div class="contact-link-icon">📱</div>
-                    <div class="contact-link-info"><div class="label">Phone</div><div class="value">9813609377</div></div>
+                    <div><div class="label">Phone</div><div class="value">9813609377</div></div>
                     <div class="contact-link-arrow">→</div>
                 </a>
                 <a href="mailto:sumittiruwa@913" class="contact-link">
                     <div class="contact-link-icon">✉️</div>
-                    <div class="contact-link-info"><div class="label">Email</div><div class="value">sumittiruwa@913</div></div>
+                    <div><div class="label">Email</div><div class="value">sumittiruwa913@gmail.com</div></div>
                     <div class="contact-link-arrow">→</div>
                 </a>
                 <a href="https://github.com/sumittiruwa/" target="_blank" class="contact-link">
                     <div class="contact-link-icon">🐙</div>
-                    <div class="contact-link-info"><div class="label">GitHub</div><div class="value">github.com/sumittiruwa</div></div>
+                    <div><div class="label">GitHub</div><div class="value">github.com/sumittiruwa</div></div>
                     <div class="contact-link-arrow">→</div>
                 </a>
             </div>
             <div class="big-cta reveal">
                 <h3>Open to Work</h3>
-                <p>Currently looking for internships, freelance projects, and collaborative opportunities in web development.</p>
-                <a href="mailto:sumittiruwa@913" class="btn-primary" style="display:inline-flex;">Send a Message ↗</a>
+                <p>Currently looking for internships, freelance projects, and collaborative opportunities in web development. I'm a fast learner who takes ownership and delivers.</p>
+                <a href="mailto:sumittiruwa@913" class="btn-primary">Send a Message ↗</a>
             </div>
         </div>
     </section>
@@ -424,7 +364,6 @@
     </footer>
 
     <script>
-        /* ── Mobile menu ── */
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             const burger = document.getElementById('hamburger');
@@ -438,89 +377,15 @@
             document.body.style.overflow = '';
         }
 
-        /* ── Scroll reveal ── */
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, i) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('in'), i * 80);
+                    setTimeout(() => entry.target.classList.add('in'), i * 70);
                     observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.06 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        /* ── Gallery slot init ── */
-        function initSlots() {
-            document.querySelectorAll('.gallery-slot').forEach(slot => {
-                const img = slot.querySelector('.slot-img');
-                const caption = slot.querySelector('.slot-caption');
-                const empty = slot.querySelector('.slot-empty-state');
-                const hasSrc = img && img.getAttribute('src') && img.getAttribute('src').trim() !== '';
-                if (hasSrc) {
-                    if (caption) caption.style.display = 'flex';
-                    if (empty) empty.style.display = 'none';
-                    img.style.display = 'block';
-                    img.onerror = function () {
-                        this.style.display = 'none';
-                        if (caption) caption.style.display = 'none';
-                        if (empty) empty.style.display = 'flex';
-                        slot.style.cursor = 'default';
-                    };
-                } else {
-                    if (img) img.style.display = 'none';
-                    if (caption) caption.style.display = 'none';
-                    if (empty) empty.style.display = 'flex';
-                    slot.style.cursor = 'default';
-                }
-            });
-        }
-        initSlots();
-
-        /* ── Lightbox ── */
-        let lbSlots = [], lbIndex = 0;
-
-        function slotClick(slot) {
-            const img = slot.querySelector('.slot-img');
-            if (!img || !img.getAttribute('src') || img.getAttribute('src').trim() === '') return;
-            const grid = slot.closest('.gallery-grid');
-            lbSlots = Array.from(grid.querySelectorAll('.gallery-slot')).filter(s => {
-                const si = s.querySelector('.slot-img');
-                return si && si.getAttribute('src') && si.getAttribute('src').trim() !== '';
-            });
-            lbIndex = lbSlots.indexOf(slot);
-            showLightbox();
-        }
-
-        function showLightbox() {
-            const slot = lbSlots[lbIndex];
-            const img = slot.querySelector('.slot-img');
-            const lbl = img.getAttribute('data-label') || '';
-            document.getElementById('lightboxImg').src = img.src;
-            document.getElementById('lightboxCaption').textContent = lbl + '  ' + (lbIndex + 1) + ' / ' + lbSlots.length;
-            document.getElementById('lightbox').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function lightboxNav(dir) {
-            if (!lbSlots.length) return;
-            lbIndex = ((lbIndex + dir) + lbSlots.length) % lbSlots.length;
-            showLightbox();
-        }
-
-        document.getElementById('lightbox').addEventListener('click', function (e) {
-            if (e.target === this) closeLightbox();
-        });
-        document.addEventListener('keydown', function (e) {
-            if (!document.getElementById('lightbox').classList.contains('open')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowRight') lightboxNav(1);
-            if (e.key === 'ArrowLeft') lightboxNav(-1);
-        });
     </script>
 </body>
 </html>
