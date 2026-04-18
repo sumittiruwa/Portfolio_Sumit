@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="../css/header.css">
+<header class="header">
+    <div class="container">
+
+        <div class="logo">ST.</div>
+
+        <!-- Nav -->
+        <nav class="nav" id="navMenu">
+            <a href="#about" onclick="closeMenu()">About</a>
+            <a href="#skills" onclick="closeMenu()">Skills</a>
+            <a href="#projects" onclick="closeMenu()">Projects</a>
+            <a href="#contact" onclick="closeMenu()">Contact</a>
+        </nav>
+
+        <div class="status">
+            <span class="dot"></span>
+            Available
+        </div>
+
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</header>
+<script>function toggleMenu() {
+    const nav = document.getElementById("navMenu");
+    const hamburger = document.getElementById("hamburger");
+
+    nav.classList.toggle("show");
+    hamburger.classList.toggle("active");
+}
+
+function closeMenu() {
+    document.getElementById("navMenu").classList.remove("show");
+    document.getElementById("hamburger").classList.remove("active");
+}</script>
