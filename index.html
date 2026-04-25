@@ -4,27 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sumit Tiruwa — Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #080808;
       --surface: #111111;
       --surface2: #181818;
-      --border: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08);
       --text: #f0ede6;
       --muted: #888;
       --accent: #c8f060;
-      --accent2: #ff6b35;
-      --accent3: #60c8f0;
-      --figma1: #F24E1E;
-      --figma2: #FF7262;
-      --figma3: #A259FF;
-      --figma4: #1ABCFE;
-      --figma5: #0ACF83;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -32,95 +24,7 @@
       color: var(--text);
       font-family: 'Syne', sans-serif;
       overflow-x: hidden;
-      cursor: none;
     }
-
-    /* ── CUSTOM CURSOR ── */
-    .cursor {
-      position: fixed;
-      width: 12px; height: 12px;
-      background: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
-      mix-blend-mode: difference;
-    }
-    .cursor-ring {
-      position: fixed;
-      width: 40px; height: 40px;
-      border: 1.5px solid var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99998;
-      transform: translate(-50%, -50%);
-      transition: all 0.15s ease;
-      mix-blend-mode: difference;
-    }
-    body:hover .cursor { opacity: 1; }
-
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9997;
-      opacity: 0.4;
-    }
-
-    /* ── LOADER ── */
-    /* #loader {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .loader-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(60px, 12vw, 140px);
-      letter-spacing: 0.05em;
-      color: var(--text);
-      overflow: hidden;
-      line-height: 1;
-    }
-    .loader-name span {
-      display: inline-block;
-      animation: loaderSlide 0.8s cubic-bezier(0.16,1,0.3,1) both;
-    }
-    .loader-name span:nth-child(2) { animation-delay: 0.1s; color: var(--accent); }
-    @keyframes loaderSlide {
-      from { transform: translateY(100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .loader-bar-wrap {
-      width: 200px;
-      height: 2px;
-      background: rgba(255,255,255,0.1);
-      overflow: hidden;
-    }
-    .loader-bar {
-      height: 100%;
-      background: var(--accent);
-      animation: loaderFill 1.4s cubic-bezier(0.4,0,0.2,1) forwards;
-    }
-    @keyframes loaderFill {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    #loader.hide {
-      animation: loaderOut 0.6s cubic-bezier(0.7,0,0.3,1) forwards;
-    }
-    @keyframes loaderOut {
-      to { transform: translateY(-100%); }
-    } */
 
     /* ── NAV ── */
     nav {
@@ -130,1051 +34,461 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 40px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: rgba(8,8,8,0.7);
+      padding: 18px 40px;
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      transition: padding 0.3s;
     }
-    nav.scrolled { padding: 14px 40px; }
     .nav-logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
+      font-size: 26px;
       letter-spacing: 0.1em;
       color: var(--accent);
       text-decoration: none;
-      position: relative;
     }
-    .nav-logo::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 2px;
-      background: var(--accent);
-      transition: width 0.3s;
-    }
-    .nav-logo:hover::after { width: 100%; }
     .nav-links {
       display: flex;
-      gap: 32px;
+      gap: 28px;
       list-style: none;
     }
     .nav-links a {
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--accent);
-      transition: width 0.3s;
     }
     .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-right { display: flex; align-items: center; gap: 16px; }
-    .nav-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 500;
-    }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
     .status-dot {
       width: 7px; height: 7px;
       background: var(--accent);
       border-radius: 50%;
-      animation: pulse 2s infinite;
+      display: inline-block;
     }
-    @keyframes pulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(200,240,96,0.5); }
-      50% { box-shadow: 0 0 0 6px rgba(200,240,96,0); }
-    }
+    .nav-status { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
     .btn-cv-nav {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--bg);
-      background: var(--accent);
-      padding: 8px 18px;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--bg); background: var(--accent);
+      padding: 8px 16px; text-decoration: none;
+      transition: opacity 0.2s;
     }
-    .btn-cv-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,240,96,0.3); }
+    .btn-cv-nav:hover { opacity: 0.85; }
+
+    /* HAMBURGER */
     .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: none;
-      padding: 4px;
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
     }
-    .hamburger span {
-      display: block;
-      width: 24px; height: 1.5px;
-      background: var(--text);
-      transition: all 0.3s;
-    }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: all 0.3s; }
     .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
     /* MOBILE MENU */
     .mobile-menu {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
+      position: fixed; inset: 0;
+      background: var(--bg); z-index: 999;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
       transform: translateX(100%);
-      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
     .mobile-menu.open { transform: translateX(0); }
- .mobile-menu a {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(18px, 5vw, 28px); /* much smaller */
-  letter-spacing: 0.08em;
-  color: var(--text);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.mobile-menu {
-  gap: 12px; /* reduce spacing between items too */
-}
+    .mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px; letter-spacing: 0.08em;
+      color: var(--text); text-decoration: none;
+    }
     .mobile-menu a:hover { color: var(--accent); }
 
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       padding: 120px 40px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg-text {
-      position: absolute;
-      bottom: -60px; right: -20px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(120px, 20vw, 280px);
-      color: rgba(255,255,255,0.02);
-      pointer-events: none;
-      user-select: none;
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-    .hero-grid-lines {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 80px 80px;
-      pointer-events: none;
-    }
-    .hero-accent-orb {
-      position: absolute;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(200,240,96,0.06) 0%, transparent 70%);
-      border-radius: 50%;
-      top: -100px; right: -100px;
-      pointer-events: none;
-      animation: orbFloat 8s ease-in-out infinite;
-    }
-    @keyframes orbFloat {
-      0%,100% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(-30px,30px) scale(1.05); }
     }
     .hero-inner {
-      max-width: 1300px;
-      margin: 0 auto;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 80px;
-      align-items: center;
+      max-width: 1200px; margin: 0 auto; width: 100%;
     }
     .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 0.8s 1.6s cubic-bezier(0.16,1,0.3,1) forwards;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 24px;
     }
     .hero-name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(72px, 10vw, 150px);
-      line-height: 0.9;
-      letter-spacing: 0.02em;
-      margin-bottom: 32px;
+      font-size: clamp(72px, 10vw, 148px);
+      line-height: 0.92; letter-spacing: 0.02em;
+      margin-bottom: 28px;
     }
-    .hero-name .line {
-      display: block;
-      overflow: hidden;
-    }
-    .hero-name .line-inner {
-      display: block;
-      opacity: 0;
-      transform: translateY(100%);
-      animation: lineReveal 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    .hero-name .line:nth-child(1) .line-inner { animation-delay: 1.7s; }
-    .hero-name .line:nth-child(2) .line-inner { animation-delay: 1.85s; color: var(--accent); font-style: italic; }
-    @keyframes lineReveal {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .hero-name span { color: var(--accent); }
     .hero-bio {
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeUp 0.8s 2.1s cubic-bezier(0.16,1,0.3,1) forwards;
+      font-size: 17px; line-height: 1.7; color: var(--muted);
+      max-width: 520px; margin-bottom: 36px;
     }
-    .hero-ctas {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s 2.3s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
-      background: var(--accent);
-      color: var(--bg);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; background: var(--accent);
+      color: var(--bg); font-size: 13px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; transition: opacity 0.2s;
     }
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.15);
-      transform: translateX(-100%);
-      transition: transform 0.3s;
-    }
-    .btn-primary:hover::before { transform: translateX(0); }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(200,240,96,0.35); }
+    .btn-primary:hover { opacity: 0.85; }
     .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      padding: 16px 32px;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.2s;
+      display: inline-flex; align-items: center;
+      padding: 14px 28px; border: 1px solid var(--border);
+      color: var(--text); font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; transition: border-color 0.2s;
     }
-    .btn-outline:hover { border-color: var(--text); transform: translateY(-3px); }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.3); }
     .btn-cv {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 28px;
-      border: 1px solid rgba(200,240,96,0.3);
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 24px; border: 1px solid rgba(200,240,96,0.3);
+      color: var(--accent); font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; transition: background 0.2s;
     }
-    .btn-cv:hover { background: rgba(200,240,96,0.08); transform: translateY(-3px); }
-    .hero-photo-wrap {
-      width: 320px; height: 400px;
-      position: relative;
-      flex-shrink: 0;
-      opacity: 0;
-      animation: fadeUp 1s 2s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    .hero-photo-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      background: linear-gradient(135deg, var(--accent), transparent, var(--accent3));
-      z-index: -1;
-      animation: borderRotate 4s linear infinite;
-    }
-    @keyframes borderRotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .hero-photo-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      position: relative;
-      z-index: 1;
-    }
-    .photo-placeholder {
-      width: 100%; height: 100%;
-      background: var(--surface);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .hero-scroll {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      opacity: 0;
-      animation: fadeUp 0.8s 2.8s forwards;
-    }
-    .hero-scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
-      animation: scrollLine 2s infinite;
-    }
-    @keyframes scrollLine {
-      0% { transform: scaleY(0); transform-origin: top; }
-      50% { transform: scaleY(1); transform-origin: top; }
-      51% { transform: scaleY(1); transform-origin: bottom; }
-      100% { transform: scaleY(0); transform-origin: bottom; }
-    }
+    .btn-cv:hover { background: rgba(200,240,96,0.06); }
     .hero-stats {
-      display: flex;
-      gap: 48px;
-      margin-top: 56px;
-      padding-top: 40px;
-      border-top: 1px solid var(--border);
-      opacity: 0;
-      animation: fadeUp 0.8s 2.5s cubic-bezier(0.16,1,0.3,1) forwards;
+      display: flex; gap: 44px;
+      padding-top: 36px; border-top: 1px solid var(--border);
+      flex-wrap: wrap;
     }
     .hero-stat-num {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 40px;
-      color: var(--accent);
-      line-height: 1;
+      font-size: 38px; color: var(--accent); line-height: 1;
     }
-    .hero-stat-label {
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
+    .hero-stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
 
-    /* ── SECTIONS ── */
-    .section-wrap {
-      padding: 100px 40px;
-      position: relative;
-    }
-    .section-inner { max-width: 1300px; margin: 0 auto; }
-    .section-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(36px, 5vw, 64px);
-      line-height: 1.1;
-      margin-bottom: 56px;
-      color: var(--text);
-    }
-    .section-title em { font-style: italic; color: var(--accent); }
-
-    /* REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .about-text p {
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-    .about-text p strong { color: var(--text); }
-    .info-cards { display: flex; flex-direction: column; gap: 12px; }
-    .info-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 22px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .info-card:hover { border-color: var(--accent); transform: translateX(6px); }
-    .info-card-icon { font-size: 22px; }
-    .info-card-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-    .info-card-value { font-size: 14px; font-weight: 600; }
-    .info-card-value a { color: var(--text); text-decoration: none; transition: color 0.2s; }
-    .info-card-value a:hover { color: var(--accent); }
-
-    /* ── TIMELINE ── */
-    .timeline { display: flex; flex-direction: column; gap: 0; }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 48px;
-      padding: 48px 0;
-      border-top: 1px solid var(--border);
-      position: relative;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 178px;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: var(--border);
-    }
-    .timeline-item:hover .timeline-role { color: var(--accent); }
-    .timeline-date { font-size: 12px; color: var(--muted); line-height: 1.6; font-family: 'JetBrains Mono', monospace; }
-    .year { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--text); margin-bottom: 4px; }
-    .timeline-role { font-size: 20px; font-weight: 700; margin-bottom: 6px; transition: color 0.3s; }
-    .timeline-company { font-size: 13px; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; margin-bottom: 16px; }
-    .timeline-desc { font-size: 14px; line-height: 1.75; color: var(--muted); margin-bottom: 20px; }
-    .timeline-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .t-tag {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      transition: all 0.2s;
-    }
-    .t-tag:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* ── EDUCATION ── */
-    .edu-list { display: flex; flex-direction: column; gap: 16px; }
-    .edu-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 24px;
-      padding: 32px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .edu-card:hover { border-color: var(--accent); transform: translateX(8px); }
-    .edu-icon { font-size: 28px; }
-    .edu-degree { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-    .edu-institution { font-size: 13px; color: var(--accent); margin-bottom: 4px; }
-    .edu-period { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
-
-    /* ── SKILLS ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-    }
-    .skill-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 20px 22px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
-      position: relative;
-      overflow: hidden;
-    }
-    .skill-item::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0; height: 2px;
-      background: var(--accent);
-      transition: width 0.4s;
-    }
-    .skill-item:hover::after { width: 100%; }
-    .skill-item:hover { border-color: rgba(200,240,96,0.3); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
-    .new-skill { border-color: rgba(200,240,96,0.15); }
-    .skill-icon { font-size: 22px; }
-    .skill-name { font-size: 14px; font-weight: 700; }
-    .skill-type { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
-
-    /* ── PROJECTS ── */
-    .projects-list { display: flex; flex-direction: column; gap: 0; }
-    .project-item {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 40px;
-      padding: 56px 0;
-      border-top: 1px solid var(--border);
-      transition: all 0.3s;
-    }
-    .project-item:hover { padding-left: 12px; }
-    .project-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      color: rgba(255,255,255,0.06);
-      line-height: 1;
-      padding-top: 4px;
-      transition: color 0.3s;
-    }
-    .project-item:hover .project-num { color: var(--accent); }
-    .project-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; gap: 24px; }
-    .project-title { font-size: 24px; font-weight: 800; line-height: 1.2; }
-    .project-links { display: flex; gap: 12px; flex-shrink: 0; }
-    .project-link {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 8px 16px;
-      border: 1px solid var(--border);
-      transition: all 0.2s;
-    }
-    .project-link:hover { color: var(--accent); border-color: var(--accent); }
-    .project-desc { font-size: 14px; line-height: 1.75; color: var(--muted); margin-bottom: 20px; max-width: 720px; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-    .project-tag {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-    .project-preview {
-      position: relative;
-      width: 100%;
-      height: 260px;
-      background: var(--surface);
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    .project-preview img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-    }
-    .project-item:hover .project-preview img { transform: scale(1.04); }
-    .project-preview-placeholder {
-      position: absolute;
-      inset: 0;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-    }
-
-    /* ── FIGMA SECTION ── */
-    .figma-designs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 24px;
-    }
-    .figma-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    .figma-card:hover {
-      border-color: rgba(200,240,96,0.25);
-      transform: translateY(-8px);
-      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-    }
-    .figma-card-preview {
-      position: relative;
-      overflow: hidden;
-    }
-    .figma-card-preview-inner {
-      width: 100%;
-      height: 240px;
-      position: relative;
-      overflow: hidden;
-    }
-   .figma-card-preview-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;   /* fits the whole image without cropping */
-  object-position: center;
-  background-color: #0d0d0d; /* or match your card bg so letterboxing looks clean */
-}
-    .figma-card:hover .figma-card-preview-inner img { transform: scale(1.06); }
-    .figma-card-preview-placeholder {
-      position: absolute;
-      inset: 0;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: var(--surface2);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .figma-card-body { padding: 24px; }
-    .figma-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .figma-logo-icon { width: 22px; height: 32px; flex-shrink: 0; }
-    .figma-card-title { font-size: 18px; font-weight: 700; }
-    .figma-card-desc { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 20px; }
-    .figma-card-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .figma-card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .figma-card-tag {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-    .figma-open-btn {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--bg);
-      background: var(--accent);
-      padding: 10px 20px;
-      border: none;
-      cursor: none;
-      transition: all 0.2s;
-    }
-    .figma-open-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,240,96,0.3); }
-
-    /* ── LIGHTBOX ── */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.95);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      cursor: none;
-      animation: lbFadeIn 0.3s ease;
-    }
-    @keyframes lbFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    #lightbox-img {
-      max-width: 90vw;
-      max-height: 90vh;
-      object-fit: contain;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.8);
-      animation: lbScale 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    @keyframes lbScale {
-      from { transform: scale(0.92); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    .lb-close {
-      position: fixed;
-      top: 24px; right: 32px;
-      color: #fff;
-      font-size: 28px;
-      cursor: none;
-      line-height: 1;
-      user-select: none;
-      width: 44px; height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255,255,255,0.2);
-      transition: all 0.2s;
-    }
-    .lb-close:hover { background: rgba(255,255,255,0.1); }
-
-    /* ── CERTIFICATES ── */
-    .cert-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 20px;
-    }
-    .cert-card {
-      padding: 32px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    .cert-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-    }
-    .cert-wordpress::before { background: linear-gradient(90deg, #21759b, #4ea9d5); }
-    .cert-figma::before { background: linear-gradient(90deg, #F24E1E, #A259FF, #0ACF83); }
-    .cert-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.15); }
-    .cert-header { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 18px; }
-    .cert-icon-wrap {
-      width: 48px; height: 48px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .cert-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
-    .cert-issuer { font-size: 12px; color: var(--muted); }
-    .cert-desc { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 24px; }
-    .cert-footer { display: flex; align-items: center; justify-content: space-between; }
-    .cert-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      padding: 6px 14px;
-      border: 1px solid rgba(200,240,96,0.3);
-    }
-    .cert-stars { display: flex; gap: 4px; }
-    .cert-star {
-      width: 6px; height: 6px;
-      background: var(--accent);
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    }
-
-    /* ── BLOGS ── */
-    .blogs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 20px;
-    }
-    .blog-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      cursor: none;
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-      position: relative;
-      overflow: hidden;
-    }
-    .blog-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(200,240,96,0.03), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .blog-card:hover::after { opacity: 1; }
-    .blog-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.4); border-color: rgba(200,240,96,0.2); }
-    .blog-card-body { padding: 28px; }
-    .blog-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-    .blog-tag {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      background: rgba(200,240,96,0.1);
-      color: var(--accent);
-      border: 1px solid rgba(200,240,96,0.2);
-    }
-    .blog-date { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
-    .blog-title { font-size: 17px; font-weight: 700; line-height: 1.4; margin-bottom: 12px; }
-    .blog-excerpt { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 20px; }
-    .blog-read {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: none;
-      border: none;
-      cursor: none;
-      padding: 0;
-      transition: gap 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .blog-read:hover { gap: 12px; }
-
-    /* BLOG MODAL */
-    .blog-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 9998;
-      display: none;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 60px 20px;
-      overflow-y: auto;
-      backdrop-filter: blur(8px);
-    }
-    .blog-modal-overlay.open { display: flex; }
-    .blog-modal {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      max-width: 760px;
-      width: 100%;
-      padding: 56px;
-      position: relative;
-      animation: modalSlide 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    @keyframes modalSlide {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .blog-modal-close {
-      position: absolute;
-      top: 24px; right: 24px;
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 36px; height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: none;
-      font-size: 14px;
-      transition: all 0.2s;
-    }
-    .blog-modal-close:hover { border-color: var(--accent); color: var(--accent); }
-    .blog-modal-tag {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .blog-modal-date { font-size: 12px; color: var(--muted); margin-bottom: 20px; font-family: 'JetBrains Mono', monospace; }
-    .blog-modal-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 32px;
-      line-height: 1.2;
-      margin-bottom: 36px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid var(--border);
-    }
-    .blog-modal-body p { font-size: 15px; line-height: 1.85; color: var(--muted); margin-bottom: 20px; }
-    .blog-modal-body h3 { font-size: 20px; font-weight: 700; color: var(--text); margin: 32px 0 12px; }
-    .blog-modal-body pre {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 20px;
-      overflow-x: auto;
-      margin: 20px 0;
-      font-size: 13px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .blog-modal-body code { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
-    .blog-modal-body blockquote {
-      border-left: 3px solid var(--accent);
-      padding: 12px 24px;
-      margin: 24px 0;
-      background: rgba(200,240,96,0.04);
-      font-style: italic;
-      color: var(--text);
-    }
-
-    /* ── CONTACT ── */
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-    }
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 22px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      text-decoration: none;
-      margin-bottom: 12px;
-      transition: all 0.3s;
-    }
-    .contact-link:hover { border-color: var(--accent); transform: translateX(8px); }
-    .contact-link .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
-    .contact-link .value { font-size: 15px; font-weight: 600; color: var(--text); }
-    .contact-link-icon { font-size: 24px; }
-    .contact-link-arrow { margin-left: auto; font-size: 18px; color: var(--muted); transition: all 0.3s; }
-    .contact-link:hover .contact-link-arrow { color: var(--accent); transform: translateX(4px); }
-    .big-cta {
-      padding: 48px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    .big-cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(200,240,96,0.04), transparent);
-    }
-    .big-cta h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      letter-spacing: 0.05em;
-      margin-bottom: 16px;
-      color: var(--accent);
-    }
-    .big-cta p { font-size: 14px; line-height: 1.75; color: var(--muted); margin-bottom: 32px; }
-    .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 40px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.1em; color: var(--accent); }
-    .footer-copy { font-size: 13px; color: var(--muted); }
-    .footer-status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
-
-    /* ── MARQUEE DIVIDER ── */
+    /* ── MARQUEE ── */
     .marquee-wrap {
       overflow: hidden;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 18px 0;
-      background: var(--surface);
+      padding: 16px 0; background: var(--surface);
     }
-    .marquee-track {
-      display: flex;
-      gap: 0;
-      animation: marquee 20s linear infinite;
-      width: max-content;
-    }
+    .marquee-track { display: flex; width: max-content; animation: marquee 22s linear infinite; }
     .marquee-item {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      padding: 0 32px;
+      display: flex; align-items: center; gap: 20px;
+      padding: 0 28px;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      white-space: nowrap;
+      font-size: 17px; letter-spacing: 0.1em;
+      color: var(--muted); white-space: nowrap;
     }
-    .marquee-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+    .marquee-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── SECTIONS ── */
+    .section-wrap { padding: 88px 40px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
     }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.05; margin-bottom: 48px;
+    }
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .about-text p { font-size: 15px; line-height: 1.8; color: var(--muted); margin-bottom: 16px; }
+    .about-text p strong { color: var(--text); }
+    .info-cards { display: flex; flex-direction: column; gap: 10px; }
+    .info-card {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px; background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .info-card:hover { border-color: var(--accent); }
+    .info-card-icon { font-size: 20px; }
+    .info-card-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+    .info-card-value { font-size: 14px; font-weight: 600; }
+    .info-card-value a { color: var(--text); text-decoration: none; }
+    .info-card-value a:hover { color: var(--accent); }
+
+    /* ── TIMELINE ── */
+    .timeline-item {
+      display: grid; grid-template-columns: 160px 1fr;
+      gap: 40px; padding: 40px 0;
+      border-top: 1px solid var(--border);
+    }
+    .timeline-date { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
+    .year { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--text); margin-bottom: 4px; }
+    .timeline-role { font-size: 19px; font-weight: 700; margin-bottom: 5px; }
+    .timeline-company { font-size: 13px; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; margin-bottom: 14px; }
+    .timeline-desc { font-size: 14px; line-height: 1.75; color: var(--muted); margin-bottom: 16px; }
+    .timeline-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .t-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 4px 11px;
+      border: 1px solid var(--border); color: var(--muted);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-list { display: flex; flex-direction: column; gap: 14px; }
+    .edu-card {
+      display: flex; align-items: flex-start; gap: 20px;
+      padding: 28px; background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .edu-card:hover { border-color: var(--accent); }
+    .edu-icon { font-size: 26px; }
+    .edu-degree { font-size: 17px; font-weight: 700; margin-bottom: 5px; }
+    .edu-institution { font-size: 13px; color: var(--accent); margin-bottom: 3px; }
+    .edu-period { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+    .skill-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 20px; background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .skill-item:hover { border-color: rgba(200,240,96,0.3); }
+    .skill-icon { font-size: 20px; }
+    .skill-name { font-size: 14px; font-weight: 700; }
+    .skill-type { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+    /* ── PROJECTS GRID ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      overflow: hidden; transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: rgba(200,240,96,0.2); }
+    .project-card-img {
+      width: 100%; height: 200px; overflow: hidden;
+      background: var(--surface2);
+    }
+    .project-card-img img {
+      width: 100%; height: 100%; object-fit: contain;
+      background: #0d0d0d;
+    }
+    .project-card-body { padding: 22px; }
+    .project-card-title { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+    .project-card-desc { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 18px; }
+    .project-card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .project-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 4px 10px;
+      border: 1px solid var(--border); color: var(--muted);
+      background: var(--surface2);
+    }
+    .project-card-links { display: flex; gap: 10px; }
+    .project-link-btn {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--bg); background: var(--accent);
+      padding: 9px 18px; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .project-link-btn:hover { opacity: 0.85; }
+    .project-link-outline {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); background: transparent;
+      padding: 9px 18px; text-decoration: none;
+      border: 1px solid rgba(200,240,96,0.3);
+      transition: background 0.2s;
+    }
+    .project-link-outline:hover { background: rgba(200,240,96,0.06); }
+
+    /* ── FIGMA DESIGNS ── */
+    .figma-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .figma-card {
+      background: var(--surface); border: 1px solid var(--border);
+      overflow: hidden; transition: border-color 0.2s;
+    }
+    .figma-card:hover { border-color: rgba(200,240,96,0.2); }
+    .figma-card-img {
+      width: 100%; height: 220px; overflow: hidden;
+      background: #0d0d0d; display: flex; align-items: center; justify-content: center;
+    }
+    .figma-card-img img { width: 100%; height: 100%; object-fit: contain; }
+    .figma-card-body { padding: 22px; }
+    .figma-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .figma-logo { width: 20px; height: 28px; flex-shrink: 0; }
+    .figma-card-title { font-size: 17px; font-weight: 700; }
+    .figma-card-desc { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 18px; }
+    .figma-card-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .figma-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .figma-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 10px;
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .figma-open-btn {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--bg);
+      background: var(--accent); padding: 9px 18px;
+      border: none; cursor: pointer; transition: opacity 0.2s;
+      text-decoration: none;
+    }
+    .figma-open-btn:hover { opacity: 0.85; }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.95); z-index: 9999;
+      align-items: center; justify-content: center;
+    }
+    #lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+    .lb-close {
+      position: fixed; top: 20px; right: 28px;
+      color: #fff; font-size: 26px; cursor: pointer;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,0.2); user-select: none;
+    }
+    .lb-close:hover { background: rgba(255,255,255,0.1); }
+
+    /* ── CERTIFICATES ── */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 18px; }
+    .cert-card {
+      padding: 28px; background: var(--surface);
+      border: 1px solid var(--border);
+      position: relative; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .cert-card:hover { border-color: rgba(255,255,255,0.15); }
+    .cert-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .cert-wordpress::before { background: linear-gradient(90deg, #21759b, #4ea9d5); }
+    .cert-figma::before { background: linear-gradient(90deg, #F24E1E, #A259FF, #0ACF83); }
+    .cert-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
+    .cert-icon-wrap {
+      width: 44px; height: 44px; background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cert-name { font-size: 17px; font-weight: 700; margin-bottom: 3px; }
+    .cert-issuer { font-size: 12px; color: var(--muted); }
+    .cert-desc { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 20px; }
+    .cert-footer { display: flex; align-items: center; justify-content: space-between; }
+    .cert-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      padding: 5px 12px; border: 1px solid rgba(200,240,96,0.3);
+    }
+
+    /* ── BLOGS ── */
+    .blogs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+    .blog-card {
+      background: var(--surface); border: 1px solid var(--border);
+      cursor: pointer; transition: border-color 0.2s;
+    }
+    .blog-card:hover { border-color: rgba(200,240,96,0.2); }
+    .blog-card-body { padding: 26px; }
+    .blog-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .blog-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 3px 9px;
+      background: rgba(200,240,96,0.08);
+      color: var(--accent); border: 1px solid rgba(200,240,96,0.2);
+    }
+    .blog-date { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    .blog-title { font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+    .blog-excerpt { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 18px; }
+    .blog-read {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      background: none; border: none; cursor: pointer; padding: 0;
+    }
+
+    /* ── BLOG MODAL ── */
+    .blog-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8); z-index: 9998;
+      display: none; align-items: flex-start; justify-content: center;
+      padding: 60px 20px; overflow-y: auto;
+      backdrop-filter: blur(6px);
+    }
+    .blog-modal-overlay.open { display: flex; }
+    .blog-modal {
+      background: var(--surface); border: 1px solid var(--border);
+      max-width: 720px; width: 100%; padding: 48px;
+      position: relative;
+    }
+    .blog-modal-close {
+      position: absolute; top: 20px; right: 20px;
+      background: none; border: 1px solid var(--border);
+      color: var(--text); width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 14px;
+    }
+    .blog-modal-close:hover { border-color: var(--accent); color: var(--accent); }
+    .blog-modal-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; }
+    .blog-modal-date { font-size: 12px; color: var(--muted); margin-bottom: 18px; font-family: 'JetBrains Mono', monospace; }
+    .blog-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; line-height: 1.15; margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .blog-modal-body p { font-size: 15px; line-height: 1.85; color: var(--muted); margin-bottom: 18px; }
+    .blog-modal-body h3 { font-size: 19px; font-weight: 700; color: var(--text); margin: 28px 0 10px; }
+    .blog-modal-body pre { background: var(--bg); border: 1px solid var(--border); padding: 18px; overflow-x: auto; margin: 18px 0; font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+    .blog-modal-body code { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+    .blog-modal-body blockquote { border-left: 3px solid var(--accent); padding: 10px 20px; margin: 20px 0; background: rgba(200,240,96,0.04); font-style: italic; color: var(--text); }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 18px;
+      padding: 20px; background: var(--surface);
+      border: 1px solid var(--border); text-decoration: none; margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); }
+    .contact-link .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .contact-link .value { font-size: 14px; font-weight: 600; color: var(--text); }
+    .contact-link-icon { font-size: 22px; }
+    .contact-link-arrow { margin-left: auto; color: var(--muted); }
+    .big-cta { padding: 40px; background: var(--surface); border: 1px solid var(--border); }
+    .big-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 44px; letter-spacing: 0.05em; margin-bottom: 14px; color: var(--accent); }
+    .big-cta p { font-size: 14px; line-height: 1.75; color: var(--muted); margin-bottom: 28px; }
+    .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 36px 40px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.1em; color: var(--accent); }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-status { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-photo-wrap { display: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 48px; }
-      .contact-inner { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns: 1fr; gap: 16px; }
-      .timeline-item::before { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 12px; }
     }
     @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
+      nav { padding: 14px 20px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .section-wrap { padding: 60px 20px; }
-      #hero { padding: 100px 20px 60px; }
-      .hero-stats { flex-wrap: wrap; gap: 24px; }
-      .project-item { grid-template-columns: 1fr; gap: 16px; padding: 40px 0; }
-      .project-num { font-size: 32px; }
+      .section-wrap { padding: 56px 20px; }
+      #hero { padding: 96px 20px 56px; }
+      .hero-stats { gap: 20px; }
       .cert-grid { grid-template-columns: 1fr; }
-      .blogs-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; text-align: center; padding: 32px 20px; }
-      .blog-modal { padding: 32px 24px; }
-      .figma-designs-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; padding: 28px 20px; }
+      .blog-modal { padding: 28px 20px; }
     }
   </style>
 </head>
 <body>
-
-  <!-- CURSOR -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-
-  <!-- LOADER -->
-  <div id="loader">
-    <div class="loader-name">
-      <span>SUMIT</span>&nbsp;<span>TIRUWA</span>
-    </div>
-    <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-  </div>
 
   <!-- BLOG MODAL -->
   <div class="blog-modal-overlay" id="blogModal" onclick="closeBlogModal(event)">
@@ -1182,6 +496,12 @@
       <button class="blog-modal-close" onclick="closeBlogModalBtn()">✕</button>
       <div id="blogModalBody"></div>
     </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" alt="Preview">
+    <div class="lb-close">✕</div>
   </div>
 
   <!-- MOBILE MENU -->
@@ -1214,63 +534,28 @@
     <div class="nav-right">
       <div class="nav-status"><div class="status-dot"></div>Available</div>
       <a href="SUmit_CV.pdf" download class="btn-cv-nav">↓ CV</a>
-      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- ─── HERO ─── -->
+  <!-- HERO -->
   <div id="hero">
-    <div class="hero-grid-lines"></div>
-    <div class="hero-accent-orb"></div>
-    <div class="hero-bg-text">DEV</div>
     <div class="hero-inner">
-      <div>
-        <div class="hero-eyebrow">
-          <div class="status-dot"></div>
-          Open to opportunities
-        </div>
-        <h1 class="hero-name">
-          <span class="line"><span class="line-inner">Sumit</span></span>
-          <span class="line"><span class="line-inner">Tiruwa.</span></span>
-        </h1>
-        <p class="hero-bio">BCA student &amp; full-stack developer building scalable, thoughtfully crafted web applications. I believe good software is equal parts logic and design sensibility.</p>
-        <div class="hero-ctas">
-          <a href="#projects" class="btn-primary">View Projects ↗</a>
-          <a href="#contact" class="btn-outline">Get in Touch</a>
-          <a href="SUmit_CV.pdf" download class="btn-cv">↓ Download CV</a>
-        </div>
-        <div class="hero-stats">
-          <div>
-            <div class="hero-stat-num">9+</div>
-            <div class="hero-stat-label">Projects Built</div>
-          </div>
-          <div>
-            <div class="hero-stat-num">2+</div>
-            <div class="hero-stat-label">Years Coding</div>
-          </div>
-          <div>
-            <div class="hero-stat-num">18+</div>
-            <div class="hero-stat-label">Tech Skills</div>
-          </div>
-        </div>
+      <div class="hero-eyebrow"><div class="status-dot"></div> Open to opportunities</div>
+      <h1 class="hero-name">Sumit<br><span>Tiruwa.</span></h1>
+      <p class="hero-bio">BCA student &amp; full-stack developer building scalable, thoughtfully crafted web applications. Good software is equal parts logic and design sensibility.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View Projects ↗</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+        <a href="SUmit_CV.pdf" download class="btn-cv">↓ Download CV</a>
       </div>
-      <div class="hero-photo-wrap">
-        <img src="profile.jpeg" alt="Sumit Tiruwa"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="photo-placeholder" style="display:none;">
-          <svg width="40" height="40" viewBox="0 0 60 60" fill="none">
-            <circle cx="30" cy="21" r="11" stroke="#555" stroke-width="1.5"/>
-            <path d="M6 54c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <span>photo here</span>
-        </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-num">9+</div><div class="hero-stat-label">Projects Built</div></div>
+        <div><div class="hero-stat-num">2+</div><div class="hero-stat-label">Years Coding</div></div>
+        <div><div class="hero-stat-num">18+</div><div class="hero-stat-label">Tech Skills</div></div>
       </div>
-    </div>
-    <div class="hero-scroll">
-      <span>Scroll</span>
-      <div class="hero-scroll-line"></div>
     </div>
   </div>
 
@@ -1292,13 +577,13 @@
     </div>
   </div>
 
-  <!-- ─── ABOUT ─── -->
+  <!-- ABOUT -->
   <div class="section-wrap" id="about">
     <div class="section-inner">
       <div class="section-label">01 — About</div>
-      <div class="about-grid reveal">
+      <div class="about-grid">
         <div class="about-text">
-          <h2 class="section-title">The person<br>behind the <em>code.</em></h2>
+          <h2 class="section-title">The person behind the <em>code.</em></h2>
           <p>I'm <strong>Sumit Tiruwa</strong>, a BCA student who enjoys building websites and learning new technologies.</p>
           <p>I work with <strong>PHP (Laravel)</strong> on the backend and <strong>JavaScript (React)</strong> on the frontend, creating simple and user-friendly applications.</p>
           <p>I have developed projects like e-commerce websites and academic systems, which helped me understand real-world development challenges.</p>
@@ -1315,24 +600,24 @@
     </div>
   </div>
 
-  <!-- ─── EXPERIENCE ─── -->
+  <!-- EXPERIENCE -->
   <div class="section-wrap" id="experience" style="background:var(--surface);">
     <div class="section-inner">
       <div class="section-label">02 — Experience</div>
-      <h2 class="section-title reveal">Where I've <em>worked.</em></h2>
+      <h2 class="section-title">Where I've <em>worked.</em></h2>
       <div class="timeline">
-        <div class="timeline-item reveal">
+        <div class="timeline-item">
           <div class="timeline-date"><span class="year">2025</span>Jan – Mar · 3 months</div>
-          <div class="timeline-body">
+          <div>
             <div class="timeline-role">Document / Customer Support Intern</div>
             <div class="timeline-company">Khalti Digital Wallet</div>
             <p class="timeline-desc">Provided customer support for Khalti's digital payment platform, handled documentation workflows, assisted users with transaction queries, and coordinated with internal teams to resolve escalations efficiently.</p>
             <div class="timeline-tags"><span class="t-tag">Customer Support</span><span class="t-tag">Documentation</span><span class="t-tag">Digital Payments</span><span class="t-tag">Communication</span></div>
           </div>
         </div>
-        <div class="timeline-item reveal">
+        <div class="timeline-item">
           <div class="timeline-date"><span class="year">2022</span>Jan – Apr · 4 months</div>
-          <div class="timeline-body">
+          <div>
             <div class="timeline-role">Operations Support</div>
             <div class="timeline-company">Medicine Manufacturing Pharma</div>
             <p class="timeline-desc">Assisted with operational documentation and data entry at a pharmaceutical manufacturing unit. Gained exposure to production tracking, compliance records, and inventory coordination in a regulated industry environment.</p>
@@ -1343,24 +628,24 @@
     </div>
   </div>
 
-  <!-- ─── EDUCATION ─── -->
+  <!-- EDUCATION -->
   <div class="section-wrap" id="education">
     <div class="section-inner">
       <div class="section-label">03 — Education</div>
-      <h2 class="section-title reveal">Academic <em>Background.</em></h2>
-      <div class="edu-list reveal">
+      <h2 class="section-title">Academic <em>Background.</em></h2>
+      <div class="edu-list">
         <div class="edu-card"><div class="edu-icon">🎓</div><div><div class="edu-degree">Bachelor of Computer Applications (BCA)</div><div class="edu-institution">Padmashree College, Tinkune, Kathmandu</div><div class="edu-period">2022 — Running</div></div></div>
         <div class="edu-card"><div class="edu-icon">📘</div><div><div class="edu-degree">Higher Secondary Education (11–12)</div><div class="edu-institution">United Higher Secondary School, Mahendranagar</div><div class="edu-period">2019 — 2021</div></div></div>
       </div>
     </div>
   </div>
 
-  <!-- ─── SKILLS ─── -->
+  <!-- SKILLS -->
   <div class="section-wrap" id="skills" style="background:var(--surface);">
     <div class="section-inner">
       <div class="section-label">04 — Skills</div>
-      <h2 class="section-title reveal">Tools &amp; <em>Technologies</em></h2>
-      <div class="skills-grid reveal">
+      <h2 class="section-title">Tools &amp; <em>Technologies</em></h2>
+      <div class="skills-grid">
         <div class="skill-item"><div class="skill-icon">⚡</div><div><div class="skill-name">JavaScript</div><div class="skill-type">Language</div></div></div>
         <div class="skill-item"><div class="skill-icon">⚛️</div><div><div class="skill-name">React</div><div class="skill-type">Frontend</div></div></div>
         <div class="skill-item"><div class="skill-icon">🐘</div><div><div class="skill-name">PHP</div><div class="skill-type">Backend</div></div></div>
@@ -1375,370 +660,160 @@
         <div class="skill-item"><div class="skill-icon">📡</div><div><div class="skill-name">Postman</div><div class="skill-type">API Testing</div></div></div>
         <div class="skill-item"><div class="skill-icon">🐍</div><div><div class="skill-name">Django</div><div class="skill-type">Framework</div></div></div>
         <div class="skill-item"><div class="skill-icon">🎨</div><div><div class="skill-name">UI / UX</div><div class="skill-type">Design</div></div></div>
-        <div class="skill-item new-skill"><div class="skill-icon">⚙️</div><div><div class="skill-name">GitHub Actions</div><div class="skill-type">CI / CD</div></div></div>
-        <div class="skill-item new-skill"><div class="skill-icon">🔐</div><div><div class="skill-name">OAuth 2.0</div><div class="skill-type">Authentication</div></div></div>
-        <div class="skill-item new-skill"><div class="skill-icon">🪙</div><div><div class="skill-name">JWT</div><div class="skill-type">Auth Tokens</div></div></div>
-        <div class="skill-item new-skill"><div class="skill-icon">🦊</div><div><div class="skill-name">GitLab</div><div class="skill-type">DevOps / VCS</div></div></div>
+        <div class="skill-item"><div class="skill-icon">⚙️</div><div><div class="skill-name">GitHub Actions</div><div class="skill-type">CI / CD</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🔐</div><div><div class="skill-name">OAuth 2.0</div><div class="skill-type">Authentication</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🪙</div><div><div class="skill-name">JWT</div><div class="skill-type">Auth Tokens</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🦊</div><div><div class="skill-name">GitLab</div><div class="skill-type">DevOps / VCS</div></div></div>
       </div>
     </div>
   </div>
 
-  <!-- ─── PROJECTS ─── -->
- <!-- ─── PROJECTS ─── -->
-<div class="section-wrap" id="projects">
-  <div class="section-inner">
-    <div class="section-label">05 — Projects</div>
-    <h2 class="section-title reveal">Selected <em>Work</em></h2>
-    <div class="figma-designs-grid reveal">
+  <!-- PROJECTS -->
+  <div class="section-wrap" id="projects">
+    <div class="section-inner">
+      <div class="section-label">05 — Projects</div>
+      <h2 class="section-title">Selected <em>Work</em></h2>
+      <div class="projects-grid">
 
-      <!-- 01 Car Rental -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="carhome.png" alt="Car Rental System"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
+        <div class="project-card">
+          <div class="project-card-img"><img src="carhome.png" alt="Car Rental System" onerror="this.parentElement.style.background='#181818'"></div>
+          <div class="project-card-body">
+            <div class="project-card-title">Car Rental System</div>
+            <p class="project-card-desc">Full-featured car rental platform with vehicle browsing, booking management, and Khalti payment gateway integration. Built with PHP and Bootstrap.</p>
+            <div class="project-card-tags"><span class="project-tag">PHP</span><span class="project-tag">JavaScript</span><span class="project-tag">Bootstrap</span><span class="project-tag">Khalti API</span><span class="project-tag">MySQL</span></div>
+            <div class="project-card-links">
+              <a href="https://github.com/sumittiruwa/wheels" target="_blank" class="project-link-btn">GitHub ↗</a>
+              <a href="http://moviematch.rf.gd/wheels/index.php" target="_blank" class="project-link-outline">Live ↗</a>
             </div>
           </div>
         </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">Car Rental System</div>
-          </div>
-          <p class="figma-card-desc">A full-featured car rental platform with vehicle browsing, booking management, and Khalti payment gateway integration. Built with PHP and Bootstrap for a smooth end-to-end rental experience.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">PHP</span>
-              <span class="figma-card-tag">JavaScript</span>
-              <span class="figma-card-tag">Bootstrap</span>
-              <span class="figma-card-tag">Khalti API</span>
-              <span class="figma-card-tag">MySQL</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="https://github.com/sumittiruwa/wheels" target="_blank" class="figma-open-btn">GitHub ↗</a>
-              <a href="http://moviematch.rf.gd/wheels/index.php" target="_blank" class="figma-open-btn" style="background:transparent;border:1px solid rgba(200,240,96,0.3);color:var(--accent);">Live ↗</a>
+
+        <div class="project-card">
+          <div class="project-card-img" style="background:#181818;display:flex;align-items:center;justify-content:center;color:#555;font-size:13px">No preview</div>
+          <div class="project-card-body">
+            <div class="project-card-title">To-Do List (Django)</div>
+            <p class="project-card-desc">Simple task management app with CRUD operations, database integration, and template rendering using Django and Python.</p>
+            <div class="project-card-tags"><span class="project-tag">Django</span><span class="project-tag">Python</span><span class="project-tag">CSS</span><span class="project-tag">HTML</span><span class="project-tag">Bootstrap</span></div>
+            <div class="project-card-links">
+              <a href="https://github.com/sumittiruwa/ToDoList_Project_with_harry" target="_blank" class="project-link-btn">GitHub ↗</a>
             </div>
           </div>
         </div>
+
+        <div class="project-card">
+          <div class="project-card-img" style="background:#181818;display:flex;align-items:center;justify-content:center;color:#555;font-size:13px">No preview</div>
+          <div class="project-card-body">
+            <div class="project-card-title">Student Attendance System</div>
+            <p class="project-card-desc">Web-based attendance management with PHP, MySQL, Docker, and Google OAuth. Teachers mark attendance, students view records, admins manage dashboard analytics.</p>
+            <div class="project-card-tags"><span class="project-tag">PHP</span><span class="project-tag">Docker</span><span class="project-tag">CI/CD</span><span class="project-tag">OAuth</span><span class="project-tag">MySQL</span></div>
+            <div class="project-card-links">
+              <a href="https://github.com/sumittiruwa/wheels" target="_blank" class="project-link-btn">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-img"><img src="weatherHome.png" alt="Weather Forecast App" onerror="this.parentElement.style.background='#181818'"></div>
+          <div class="project-card-body">
+            <div class="project-card-title">Weather Forecast App</div>
+            <p class="project-card-desc">React weather app with city search, 5-day forecast, and dynamic backgrounds that shift with weather conditions. Fully responsive.</p>
+            <div class="project-card-tags"><span class="project-tag">React</span><span class="project-tag">JavaScript</span><span class="project-tag">CSS</span><span class="project-tag">Weather API</span></div>
+            <div class="project-card-links">
+              <a href="https://github.com/sumittiruwa/WeatherForecast" target="_blank" class="project-link-btn">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-img"><img src="sports.png" alt="Sports E-Commerce" onerror="this.parentElement.style.background='#181818'"></div>
+          <div class="project-card-body">
+            <div class="project-card-title">Sports E-Commerce Platform</div>
+            <p class="project-card-desc">Full sports equipment store with category filtering, cart, user auth, order tracking, and an admin dashboard. Built with Laravel.</p>
+            <div class="project-card-tags"><span class="project-tag">PHP</span><span class="project-tag">Laravel</span><span class="project-tag">Bootstrap</span><span class="project-tag">MySQL</span></div>
+            <div class="project-card-links">
+              <a href="https://github.com/sumittiruwa/Sports_shop_E-commerce" target="_blank" class="project-link-btn">GitHub ↗</a>
+              <a href="http://moviematch.rf.gd/sports/" target="_blank" class="project-link-outline">Live ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-img" style="background:#181818;display:flex;align-items:center;justify-content:center;color:#555;font-size:13px">No preview</div>
+          <div class="project-card-body">
+            <div class="project-card-title">Real-Time Chat Application</div>
+            <p class="project-card-desc">Responsive messaging app on WebSockets and Node.js with live online/offline status, profile management, and unread badges.</p>
+            <div class="project-card-tags"><span class="project-tag">Node.js</span><span class="project-tag">PHP</span><span class="project-tag">WebSockets</span><span class="project-tag">MySQL</span></div>
+            <div class="project-card-links">
+              <a href="https://github.com/sumittiruwa/Real_Time_chatting_App_" target="_blank" class="project-link-btn">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-img"><img src="movie.png" alt="Movie Platform" onerror="this.parentElement.style.background='#181818'"></div>
+          <div class="project-card-body">
+            <div class="project-card-title">Movie Recommendation Platform</div>
+            <p class="project-card-desc">Netflix-inspired discovery platform using Google API, YouTube API, and Stripe subscriptions with a custom recommendation algorithm.</p>
+            <div class="project-card-tags"><span class="project-tag">Laravel</span><span class="project-tag">Google API</span><span class="project-tag">YouTube API</span><span class="project-tag">Stripe</span></div>
+            <div class="project-card-links">
+              <a href="https://github.com/sumittiruwa/Netflix-clone" target="_blank" class="project-link-btn">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-img" style="background:#181818;display:flex;align-items:center;justify-content:center;color:#555;font-size:13px">No preview</div>
+          <div class="project-card-body">
+            <div class="project-card-title">Inventory Management System</div>
+            <p class="project-card-desc">Shop management tool for tracking stock levels, supplier relationships, and orders with low-stock alerts and sales reporting.</p>
+            <div class="project-card-tags"><span class="project-tag">PHP</span><span class="project-tag">Bootstrap</span><span class="project-tag">JavaScript</span><span class="project-tag">MySQL</span></div>
+            <div class="project-card-links">
+              <a href="https://github.com/sumittiruwa/Inventory_System" target="_blank" class="project-link-btn">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-img"><img src="portfolio.png" alt="Portfolio Analyzer" onerror="this.parentElement.style.background='#181818'"></div>
+          <div class="project-card-body">
+            <div class="project-card-title">Portfolio Analyzer</div>
+            <p class="project-card-desc">A tool to evaluate and surface insights from developer portfolios with a clean, readable UI focused on clarity and decision support.</p>
+            <div class="project-card-tags"><span class="project-tag">PHP</span><span class="project-tag">JavaScript</span><span class="project-tag">UI/UX</span></div>
+            <div class="project-card-links">
+              <a href="http://moviematch.rf.gd/portfolio_analyzer" target="_blank" class="project-link-btn">Live ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-img"><img src="Cafe.png" alt="Tailwind Cafe UI" onerror="this.parentElement.style.background='#181818'"></div>
+          <div class="project-card-body">
+            <div class="project-card-title">Tailwind Cafe UI</div>
+            <p class="project-card-desc">Modern, responsive cafe booking interface built entirely with Tailwind CSS. Clean component composition and strong visual hierarchy.</p>
+            <div class="project-card-tags"><span class="project-tag">Tailwind CSS</span><span class="project-tag">HTML</span><span class="project-tag">UI Design</span></div>
+            <div class="project-card-links">
+              <a href="https://tailwind-ui-cafe-booking-porject.vercel.app/" target="_blank" class="project-link-btn">Live ↗</a>
+            </div>
+          </div>
+        </div>
+
       </div>
-
-      <!-- 02 Django Todo -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="YOUR_PREVIEW_IMAGE_LINK" alt="Django Todo"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
-            </div>
-          </div>
-        </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">To-Do List By Django</div>
-          </div>
-          <p class="figma-card-desc">A simple and user-friendly To-Do List web application built using Django. Allows users to manage daily tasks efficiently by adding, updating, and deleting tasks. Demonstrates CRUD operations, database integration, and template rendering.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">Django</span>
-              <span class="figma-card-tag">Python</span>
-              <span class="figma-card-tag">CSS</span>
-              <span class="figma-card-tag">HTML</span>
-              <span class="figma-card-tag">Bootstrap</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="https://github.com/sumittiruwa/ToDoList_Project_with_harry" target="_blank" class="figma-open-btn">GitHub ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 03 Docker Attendance -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="YOUR_PREVIEW_IMAGE" alt="Student Attendance System"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
-            </div>
-          </div>
-        </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">Student Attendance System (Docker)</div>
-          </div>
-          <p class="figma-card-desc">A web-based attendance management system built using PHP, MySQL, Docker, and Google OAuth authentication. Allows teachers to mark attendance, students to view records, and admins to manage and analyze attendance data with dashboard analytics.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">PHP</span>
-              <span class="figma-card-tag">JavaScript</span>
-              <span class="figma-card-tag">Bootstrap</span>
-              <span class="figma-card-tag">Docker</span>
-              <span class="figma-card-tag">CI/CD</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="https://github.com/sumittiruwa/wheels" target="_blank" class="figma-open-btn">GitHub ↗</a>
-              <a href="http://moviematch.rf.gd/wheels/index.php" target="_blank" class="figma-open-btn" style="background:transparent;border:1px solid rgba(200,240,96,0.3);color:var(--accent);">Live ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 04 Weather -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="weatherHome.png" alt="Weather Forecast App"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
-            </div>
-          </div>
-        </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">Weather Forecast App</div>
-          </div>
-          <p class="figma-card-desc">A React-based weather forecast application displaying current conditions and a 5-day outlook. Features city search, dynamic background themes that shift with weather conditions, and a fully responsive layout.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">React</span>
-              <span class="figma-card-tag">JavaScript</span>
-              <span class="figma-card-tag">CSS</span>
-              <span class="figma-card-tag">Weather API</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="https://github.com/sumittiruwa/WeatherForecast" target="_blank" class="figma-open-btn">GitHub ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 05 Sports E-Commerce -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="sports.png" alt="Sports E-Commerce Platform"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
-            </div>
-          </div>
-        </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">Sports E-Commerce Platform</div>
-          </div>
-          <p class="figma-card-desc">A full-featured sports equipment store built as a 4th semester project. Includes product listings with category filtering, shopping cart, user authentication, order tracking, and an admin dashboard.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">PHP</span>
-              <span class="figma-card-tag">Laravel</span>
-              <span class="figma-card-tag">Bootstrap</span>
-              <span class="figma-card-tag">JavaScript</span>
-              <span class="figma-card-tag">MySQL</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="https://github.com/sumittiruwa/Sports_shop_E-commerce" target="_blank" class="figma-open-btn">GitHub ↗</a>
-              <a href="http://moviematch.rf.gd/sports/" target="_blank" class="figma-open-btn" style="background:transparent;border:1px solid rgba(200,240,96,0.3);color:var(--accent);">Live ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 06 Chat App -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="YOUR_PREVIEW_IMAGE_LINK" alt="Real-Time Chat Application"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
-            </div>
-          </div>
-        </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">Real-Time Chat Application</div>
-          </div>
-          <p class="figma-card-desc">A responsive real-time messaging app built on WebSockets and Node.js. Users can send instant messages, see live online/offline status, manage profiles, and receive unread notification badges.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">Node.js</span>
-              <span class="figma-card-tag">PHP</span>
-              <span class="figma-card-tag">WebSockets</span>
-              <span class="figma-card-tag">MySQL</span>
-              <span class="figma-card-tag">Bootstrap</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="https://github.com/sumittiruwa/Real_Time_chatting_App_" target="_blank" class="figma-open-btn">GitHub ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 07 Movie Platform -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="movie.png" alt="Movie Recommendation Platform"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
-            </div>
-          </div>
-        </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">Movie Recommendation Platform</div>
-          </div>
-          <p class="figma-card-desc">A Netflix-inspired streaming discovery platform integrating Google API and YouTube API for content browsing, Stripe for secure subscription payments, and a custom recommendation algorithm.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">Laravel</span>
-              <span class="figma-card-tag">PHP</span>
-              <span class="figma-card-tag">Google API</span>
-              <span class="figma-card-tag">YouTube API</span>
-              <span class="figma-card-tag">Stripe</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="https://github.com/sumittiruwa/Netflix-clone" target="_blank" class="figma-open-btn">GitHub ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 08 Inventory -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="YOUR_PREVIEW_IMAGE_LINK" alt="Inventory Management System"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
-            </div>
-          </div>
-        </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">Inventory Management System</div>
-          </div>
-          <p class="figma-card-desc">A comprehensive shop management tool for tracking stock levels, supplier relationships, and orders in real time. Includes low-stock alerts, dynamic JavaScript interactions, and sales reporting.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">PHP</span>
-              <span class="figma-card-tag">Bootstrap</span>
-              <span class="figma-card-tag">JavaScript</span>
-              <span class="figma-card-tag">MySQL</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="https://github.com/sumittiruwa/Inventory_System" target="_blank" class="figma-open-btn">GitHub ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 09 Portfolio Analyzer -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="portfolio.png" alt="Portfolio Analyzer"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
-            </div>
-          </div>
-        </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">Portfolio Analyzer</div>
-          </div>
-          <p class="figma-card-desc">A tool designed to evaluate and surface insights from developer portfolios. Presents structured analysis with a clean, readable UI focused on clarity and decision support.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">PHP</span>
-              <span class="figma-card-tag">JavaScript</span>
-              <span class="figma-card-tag">UI/UX</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="http://moviematch.rf.gd/portfolio_analyzer" target="_blank" class="figma-open-btn">Live ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 10 Tailwind Cafe -->
-      <div class="figma-card">
-        <div class="figma-card-preview">
-          <div class="figma-card-preview-inner">
-            <img src="Cafe.png" alt="Tailwind Cafe UI"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="figma-card-preview-placeholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              project preview
-            </div>
-          </div>
-        </div>
-        <div class="figma-card-body">
-          <div class="figma-card-header">
-            <div class="figma-card-title">Tailwind Cafe UI</div>
-          </div>
-          <p class="figma-card-desc">A modern, fully responsive cafe booking interface built entirely with Tailwind CSS. Demonstrates clean component composition, utility-first design thinking, and attention to visual hierarchy.</p>
-          <div class="figma-card-footer">
-            <div class="figma-card-tags">
-              <span class="figma-card-tag">Tailwind CSS</span>
-              <span class="figma-card-tag">HTML</span>
-              <span class="figma-card-tag">UI Design</span>
-            </div>
-            <div style="display:flex;gap:8px;">
-              <a href="https://tailwind-ui-cafe-booking-porject.vercel.app/" target="_blank" class="figma-open-btn">Live ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
-</div>
 
-  <!-- ─── FIGMA UI DESIGNS ─── -->
+  <!-- FIGMA UI DESIGNS -->
   <div class="section-wrap" id="figma" style="background:var(--surface);">
     <div class="section-inner">
       <div class="section-label">06 — UI Designs</div>
-      <h2 class="section-title reveal">Figma <em>Design Work</em></h2>
-      <div class="figma-designs-grid reveal">
-
+      <h2 class="section-title">Figma <em>Design Work</em></h2>
+      <div class="figma-grid">
         <div class="figma-card">
-          <div class="figma-card-preview">
-            <div class="figma-card-preview-inner">
-              <img src="UIHome.png" alt="E-Commerce UI Design"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="figma-card-preview-placeholder">
-                <svg width="30" height="28" viewBox="0 0 38 57" fill="none">
-                  <rect x="0" y="0" width="18" height="18" rx="9" fill="#F24E1E"/>
-                  <rect x="20" y="0" width="18" height="18" rx="9" fill="#FF7262"/>
-                  <rect x="0" y="20" width="18" height="18" rx="9" fill="#A259FF"/>
-                  <rect x="0" y="39" width="18" height="18" rx="9" fill="#1ABCFE"/>
-                  <rect x="20" y="20" width="18" height="37" rx="9" fill="#0ACF83"/>
-                </svg>
-                figma preview
-              </div>
-            </div>
+          <div class="figma-card-img">
+            <img src="UIHome.png" alt="E-Commerce UI Design" id="figma-img-1" onerror="this.style.display='none'">
           </div>
           <div class="figma-card-body">
             <div class="figma-card-header">
-              <svg class="figma-logo-icon" viewBox="0 0 38 57" fill="none">
+              <svg class="figma-logo" viewBox="0 0 38 57" fill="none">
                 <rect x="0" y="0" width="18" height="18" rx="9" fill="#F24E1E"/>
                 <rect x="20" y="0" width="18" height="18" rx="9" fill="#FF7262"/>
                 <rect x="0" y="20" width="18" height="18" rx="9" fill="#A259FF"/>
@@ -1747,85 +822,74 @@
               </svg>
               <div class="figma-card-title">E-Commerce UI Design</div>
             </div>
-            <p class="figma-card-desc">A complete e-commerce interface designed in Figma — covering product listing pages, detail views, cart flow, and checkout screens. Focused on clean visual hierarchy and consistent components.</p>
+            <p class="figma-card-desc">A complete e-commerce interface designed in Figma — product listings, detail views, cart flow, and checkout screens with clean visual hierarchy.</p>
             <div class="figma-card-footer">
-              <div class="figma-card-tags">
-                <span class="figma-card-tag">UI Design</span>
-                <span class="figma-card-tag">E-Commerce</span>
-                <span class="figma-card-tag">Prototype</span>
-              </div>
-              <button class="figma-open-btn" onclick="openLightbox(this.closest('.figma-card'))">Open ↗</button>
+              <div class="figma-tags"><span class="figma-tag">UI Design</span><span class="figma-tag">E-Commerce</span><span class="figma-tag">Prototype</span></div>
+              <button class="figma-open-btn" onclick="openLightbox('UIHome.png')">Open ↗</button>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- LIGHTBOX -->
-  <div id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" alt="Fullscreen preview">
-    <div class="lb-close" onclick="closeLightbox()">✕</div>
-  </div>
-
-  <!-- ─── CERTIFICATES ─── -->
+  <!-- CERTIFICATES -->
   <div class="section-wrap" id="certificates">
     <div class="section-inner">
       <div class="section-label">07 — Certificates</div>
-      <h2 class="section-title reveal">Achievements &amp; <em>Recognition</em></h2>
-      <div class="cert-grid reveal">
+      <h2 class="section-title">Achievements &amp; <em>Recognition</em></h2>
+      <div class="cert-grid">
         <div class="cert-card cert-wordpress">
           <div class="cert-header">
-            <div class="cert-icon-wrap"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="12" stroke="#21759b" stroke-width="1.5"/><circle cx="13" cy="13" r="5" fill="#21759b" fill-opacity=".3"/><path d="M13 1C13 1 7 7 7 13s6 12 6 12" stroke="#21759b" stroke-width="1.2" stroke-linecap="round"/><path d="M1 13h24" stroke="#21759b" stroke-width="1.2" stroke-linecap="round"/></svg></div>
-            <div class="cert-title-wrap"><div class="cert-name">WordPress Seminar</div><div class="cert-issuer">Workshop Certificate · Kathmandu</div></div>
+            <div class="cert-icon-wrap"><svg width="24" height="24" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="12" stroke="#21759b" stroke-width="1.5"/><circle cx="13" cy="13" r="5" fill="#21759b" fill-opacity=".3"/><path d="M13 1C13 1 7 7 7 13s6 12 6 12" stroke="#21759b" stroke-width="1.2" stroke-linecap="round"/><path d="M1 13h24" stroke="#21759b" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+            <div><div class="cert-name">WordPress Seminar</div><div class="cert-issuer">Workshop Certificate · Kathmandu</div></div>
           </div>
-          <p class="cert-desc">Attended a comprehensive WordPress seminar covering website creation, theme customisation, plugin development, and content management best practices for modern web publishing.</p>
-          <div class="cert-footer"><span class="cert-badge"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1l1.18 2.39 2.64.38-1.91 1.86.45 2.63L5 7.02 2.64 8.26l.45-2.63L1.18 3.77l2.64-.38L5 1z" fill="currentColor"/></svg>Completed</span><div class="cert-stars"><div class="cert-star"></div><div class="cert-star"></div><div class="cert-star"></div></div></div>
+          <p class="cert-desc">Attended a comprehensive WordPress seminar covering website creation, theme customisation, plugin development, and content management best practices.</p>
+          <div class="cert-footer"><span class="cert-badge">✦ Completed</span></div>
         </div>
         <div class="cert-card cert-figma">
           <div class="cert-header">
-            <div class="cert-icon-wrap"><svg width="22" height="32" viewBox="0 0 38 57" fill="none"><rect x="0" y="0" width="18" height="18" rx="9" fill="#F24E1E"/><rect x="20" y="0" width="18" height="18" rx="9" fill="#FF7262"/><rect x="0" y="20" width="18" height="18" rx="9" fill="#A259FF"/><rect x="0" y="39" width="18" height="18" rx="9" fill="#1ABCFE"/><rect x="20" y="20" width="18" height="37" rx="9" fill="#0ACF83"/></svg></div>
-            <div class="cert-title-wrap"><div class="cert-name">Figma UI/UX Workshop</div><div class="cert-issuer">Design Workshop Certificate · Kathmandu</div></div>
+            <div class="cert-icon-wrap"><svg width="20" height="28" viewBox="0 0 38 57" fill="none"><rect x="0" y="0" width="18" height="18" rx="9" fill="#F24E1E"/><rect x="20" y="0" width="18" height="18" rx="9" fill="#FF7262"/><rect x="0" y="20" width="18" height="18" rx="9" fill="#A259FF"/><rect x="0" y="39" width="18" height="18" rx="9" fill="#1ABCFE"/><rect x="20" y="20" width="18" height="37" rx="9" fill="#0ACF83"/></svg></div>
+            <div><div class="cert-name">Figma UI/UX Workshop</div><div class="cert-issuer">Design Workshop Certificate · Kathmandu</div></div>
           </div>
-          <p class="cert-desc">Participated in a hands-on Figma workshop focused on UI/UX design fundamentals, prototyping techniques, component systems, and design-to-developer handoff workflows for modern web products.</p>
-          <div class="cert-footer"><span class="cert-badge"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1l1.18 2.39 2.64.38-1.91 1.86.45 2.63L5 7.02 2.64 8.26l.45-2.63L1.18 3.77l2.64-.38L5 1z" fill="currentColor"/></svg>Completed</span><div class="cert-stars"><div class="cert-star"></div><div class="cert-star"></div><div class="cert-star"></div></div></div>
+          <p class="cert-desc">Hands-on Figma workshop covering UI/UX fundamentals, prototyping techniques, component systems, and design-to-developer handoff workflows.</p>
+          <div class="cert-footer"><span class="cert-badge">✦ Completed</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ─── BLOGS ─── -->
+  <!-- BLOGS -->
   <div class="section-wrap" id="blogs" style="background:var(--surface);">
     <div class="section-inner">
       <div class="section-label">08 — Blogs</div>
-      <h2 class="section-title reveal">Thoughts &amp; <em>Writings</em></h2>
-      <div class="blogs-grid reveal">
-        <div class="blog-card" onclick="openBlog('laravel')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">Laravel</span><span class="blog-date">Mar 2025</span></div><div class="blog-title">Building RESTful APIs with Laravel: A Practical Guide</div><p class="blog-excerpt">A step-by-step walkthrough of setting up clean, versioned REST APIs using Laravel — covering routing, controllers, resources, and authentication with Sanctum.</p><button class="blog-read">Read more →</button></div></div>
-        <div class="blog-card" onclick="openBlog('react')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">React</span><span class="blog-date">Feb 2025</span></div><div class="blog-title">State Management in React Without Redux</div><p class="blog-excerpt">Exploring how Context API, useReducer, and Zustand can handle complex application state without the overhead of Redux — with real examples from my projects.</p><button class="blog-read">Read more →</button></div></div>
-        <div class="blog-card" onclick="openBlog('docker')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">DevOps</span><span class="blog-date">Jan 2025</span></div><div class="blog-title">Containerising PHP Apps with Docker: My First Experience</div><p class="blog-excerpt">How I Dockerised a Laravel application for the first time — understanding Dockerfiles, Compose services, networking, and why it made local dev much smoother.</p><button class="blog-read">Read more →</button></div></div>
-        <div class="blog-card" onclick="openBlog('websockets')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">WebSockets</span><span class="blog-date">Dec 2024</span></div><div class="blog-title">Real-Time Chat: WebSockets vs. Polling — What I Learnt</div><p class="blog-excerpt">After building a live chat app, I compare WebSocket connections versus traditional HTTP polling — performance implications, when to use each, and what surprised me most.</p><button class="blog-read">Read more →</button></div></div>
-        <div class="blog-card" onclick="openBlog('design')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">UI/UX</span><span class="blog-date">Nov 2024</span></div><div class="blog-title">Why Every Developer Should Learn Basic Design Principles</div><p class="blog-excerpt">Good code alone isn't enough. Here's why I started learning design — spacing, hierarchy, contrast — and how it changed the way I write frontend code entirely.</p><button class="blog-read">Read more →</button></div></div>
-        <div class="blog-card" onclick="openBlog('khalti')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">Career</span><span class="blog-date">Oct 2024</span></div><div class="blog-title">What My Internship at Khalti Taught Me About Real-World Dev</div><p class="blog-excerpt">Reflections from three months in a fast-paced fintech environment — what textbooks don't prepare you for, how teams actually communicate, and the soft skills that matter most.</p><button class="blog-read">Read more →</button></div></div>
+      <h2 class="section-title">Thoughts &amp; <em>Writings</em></h2>
+      <div class="blogs-grid">
+        <div class="blog-card" onclick="openBlog('laravel')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">Laravel</span><span class="blog-date">Mar 2025</span></div><div class="blog-title">Building RESTful APIs with Laravel: A Practical Guide</div><p class="blog-excerpt">A step-by-step walkthrough of clean, versioned REST APIs using Laravel — routing, controllers, resources, and Sanctum authentication.</p><button class="blog-read">Read more →</button></div></div>
+        <div class="blog-card" onclick="openBlog('react')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">React</span><span class="blog-date">Feb 2025</span></div><div class="blog-title">State Management in React Without Redux</div><p class="blog-excerpt">Exploring Context API, useReducer, and Zustand for complex state management — without the overhead of Redux.</p><button class="blog-read">Read more →</button></div></div>
+        <div class="blog-card" onclick="openBlog('docker')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">DevOps</span><span class="blog-date">Jan 2025</span></div><div class="blog-title">Containerising PHP Apps with Docker: My First Experience</div><p class="blog-excerpt">How I Dockerised a Laravel app — Dockerfiles, Compose services, networking, and why it made local dev smoother.</p><button class="blog-read">Read more →</button></div></div>
+        <div class="blog-card" onclick="openBlog('websockets')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">WebSockets</span><span class="blog-date">Dec 2024</span></div><div class="blog-title">Real-Time Chat: WebSockets vs. Polling — What I Learnt</div><p class="blog-excerpt">After building a live chat app, comparing WebSockets versus HTTP polling — performance implications and what surprised me.</p><button class="blog-read">Read more →</button></div></div>
+        <div class="blog-card" onclick="openBlog('design')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">UI/UX</span><span class="blog-date">Nov 2024</span></div><div class="blog-title">Why Every Developer Should Learn Basic Design Principles</div><p class="blog-excerpt">Good code alone isn't enough. How learning spacing, hierarchy, and contrast changed the way I write frontend code.</p><button class="blog-read">Read more →</button></div></div>
+        <div class="blog-card" onclick="openBlog('khalti')"><div class="blog-card-body"><div class="blog-meta"><span class="blog-tag">Career</span><span class="blog-date">Oct 2024</span></div><div class="blog-title">What My Internship at Khalti Taught Me About Real-World Dev</div><p class="blog-excerpt">Reflections from three months in fintech — what textbooks don't teach, how teams communicate, and the soft skills that matter.</p><button class="blog-read">Read more →</button></div></div>
       </div>
     </div>
   </div>
 
-  <!-- ─── CONTACT ─── -->
+  <!-- CONTACT -->
   <div class="section-wrap" id="contact">
     <div class="section-inner">
       <div class="section-label">09 — Contact</div>
-      <div class="contact-inner">
-        <div class="reveal">
-          <h2 class="section-title">Let's build<br>something <em>great.</em></h2>
-          <p style="font-size:15px;line-height:1.75;color:var(--muted);margin-bottom:36px;">Whether you have a project in mind, a collaboration idea, or just want to connect — my inbox is always open and I respond promptly.</p>
+      <div class="contact-grid">
+        <div>
+          <h2 class="section-title">Let's build something <em>great.</em></h2>
+          <p style="font-size:15px;line-height:1.75;color:var(--muted);margin-bottom:32px;">Whether you have a project in mind, a collaboration idea, or just want to connect — my inbox is always open.</p>
           <a href="tel:9813609377" class="contact-link"><div class="contact-link-icon">📱</div><div><div class="label">Phone</div><div class="value">9813609377</div></div><div class="contact-link-arrow">→</div></a>
           <a href="mailto:sumittiruwa913@gmail.com" class="contact-link"><div class="contact-link-icon">✉️</div><div><div class="label">Email</div><div class="value">sumittiruwa913@gmail.com</div></div><div class="contact-link-arrow">→</div></a>
           <a href="https://github.com/sumittiruwa/" target="_blank" class="contact-link"><div class="contact-link-icon">🐙</div><div><div class="label">GitHub</div><div class="value">github.com/sumittiruwa</div></div><div class="contact-link-arrow">→</div></a>
         </div>
-        <div class="big-cta reveal">
+        <div class="big-cta">
           <h3>Open to Work</h3>
-          <p>Currently looking for internships, freelance projects, and collaborative opportunities in web development. I'm a fast learner who takes ownership and delivers.</p>
+          <p>Looking for internships, freelance projects, and collaborative opportunities in web development. Fast learner who takes ownership and delivers.</p>
           <div class="cta-btns">
             <a href="mailto:sumittiruwa913@gmail.com" class="btn-primary">Send a Message ↗</a>
             <a href="SUmit_CV.pdf" download class="btn-cv">↓ Download CV</a>
@@ -1835,7 +899,7 @@
     </div>
   </div>
 
-  <!-- ─── FOOTER ─── -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">ST.</div>
     <div class="footer-copy">© 2026 Sumit Tiruwa. All rights reserved.</div>
@@ -1843,39 +907,7 @@
   </footer>
 
   <script>
-    /* ── LOADER ── */
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const loader = document.getElementById('loader');
-        loader.classList.add('hide');
-        setTimeout(() => loader.style.display = 'none', 700);
-      }, 1800);
-    });
-
-    /* ── CURSOR ── */
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
-    function animateRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-    document.querySelectorAll('a, button, .blog-card, .skill-item, .project-link, .cert-card').forEach(el => {
-      el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2.5)'; ring.style.transform = 'translate(-50%,-50%) scale(1.5)'; ring.style.borderColor = 'var(--accent)'; });
-      el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'var(--accent)'; });
-    });
-
-    /* ── NAV SCROLL ── */
-    window.addEventListener('scroll', () => {
-      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    /* ── MOBILE MENU ── */
+    /* MOBILE MENU */
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       const burger = document.getElementById('hamburger');
@@ -1889,62 +921,49 @@
       document.body.style.overflow = '';
     }
 
-    /* ── SCROLL REVEAL ── */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('in'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.06 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    /* ── LIGHTBOX ── */
-    function openLightbox(card) {
-      const img = card.querySelector('img');
-      if (!img || !img.src || img.style.display === 'none') return;
-      document.getElementById('lightbox-img').src = img.src;
-      const lb = document.getElementById('lightbox');
-      lb.style.display = 'flex';
+    /* LIGHTBOX */
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
       document.body.style.overflow = 'hidden';
     }
     function closeLightbox() {
       document.getElementById('lightbox').style.display = 'none';
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLightbox(); closeBlogModalBtn(); } });
 
-    /* ── BLOG DATA ── */
+    /* BLOG DATA */
     const blogData = {
       laravel: { tag:'Laravel', date:'March 2025', title:'Building RESTful APIs with Laravel: A Practical Guide', body:`<p>Laravel has become one of the most popular PHP frameworks for building robust REST APIs, and for good reason. Its elegant syntax, built-in tools, and extensive ecosystem make API development feel natural and enjoyable.</p><h3>Setting Up the Foundation</h3><p>Before writing a single route, structure matters. I always start by creating a dedicated <code>api</code> version prefix in <code>routes/api.php</code>. This lets you evolve your API without breaking existing clients.</p><pre><code>Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
-});</code></pre><h3>Controllers and Resources</h3><p>Fat controllers are a common mistake. Keep your controllers thin by delegating business logic to service classes. Your controller should only handle HTTP concerns — request validation, calling the service, returning the response.</p><blockquote>A controller that does too much is a controller that tests too little.</blockquote><p>Laravel's API Resources are a game-changer for response formatting. Instead of returning raw Eloquent models, define a Resource that shapes exactly what the client receives.</p><h3>Authentication with Sanctum</h3><p>For SPA authentication or simple token-based APIs, Laravel Sanctum is the right choice. It's lightweight, well-documented, and integrates seamlessly with the framework.</p><pre><code>$token = $user->createToken('api-token')->plainTextToken;</code></pre><h3>Key Takeaways</h3><p>Building a good API is about discipline: version your routes from day one, use Resources for all responses, validate everything with Form Requests, and document as you go.</p>` },
+});</code></pre><h3>Controllers and Resources</h3><p>Fat controllers are a common mistake. Keep your controllers thin by delegating business logic to service classes. Your controller should only handle HTTP concerns — request validation, calling the service, returning the response.</p><blockquote>A controller that does too much is a controller that tests too little.</blockquote><p>Laravel's API Resources are a game-changer for response formatting. Instead of returning raw Eloquent models, define a Resource that shapes exactly what the client receives.</p><h3>Authentication with Sanctum</h3><p>For SPA authentication or simple token-based APIs, Laravel Sanctum is the right choice. It's lightweight, well-documented, and integrates seamlessly with the framework.</p><pre><code>$token = $user->createToken('api-token')->plainTextToken;</code></pre>` },
       react: { tag:'React', date:'February 2025', title:'State Management in React Without Redux', body:`<p>Redux has been the go-to state management solution for React for years. But with the evolution of React's built-in APIs and lightweight alternatives like Zustand, you often don't need Redux at all.</p><h3>Context API + useReducer</h3><p>For small to medium apps, <code>Context API</code> paired with <code>useReducer</code> is surprisingly powerful. The pattern mirrors Redux conceptually but requires zero extra dependencies.</p><pre><code>const [state, dispatch] = useReducer(userReducer, { user: null });</code></pre><h3>Zustand: The Sweet Spot</h3><p>When Context starts to feel clunky — particularly around re-renders — Zustand is my first recommendation. It's tiny (~1KB), has an intuitive API, and doesn't require wrapping your entire app in providers.</p><blockquote>Zustand proves that great state management doesn't need to be complicated.</blockquote><h3>Server State is Different</h3><p>A major revelation in my projects was realising that most "state management" problems were actually server state problems. Libraries like TanStack Query handle caching, synchronisation, and background refetching — things Redux was never designed for.</p>` },
       docker: { tag:'DevOps', date:'January 2025', title:'Containerising PHP Apps with Docker: My First Experience', body:`<p>I'll be honest — Docker scared me for a long time. But after finally sitting down and Dockerising my Laravel application, I realised it was one of the best development decisions I've made.</p><h3>The Dockerfile</h3><p>Start simple. A Dockerfile is just a recipe for building your app's environment as an image.</p><pre><code>FROM php:8.2-fpm
 WORKDIR /var/www
 RUN docker-php-ext-install pdo_mysql mbstring gd
 COPY . .
-RUN composer install --no-dev --optimize-autoloader</code></pre><h3>Docker Compose: Where It Gets Powerful</h3><p>The real power comes from <code>docker-compose.yml</code>, which lets you define multiple services — PHP, Nginx, MySQL — as a single unit.</p><blockquote>Docker Compose turns complex multi-service setup into a single <code>docker compose up</code> command.</blockquote><h3>What Changed</h3><p>After Dockerising my app, onboarding became trivial. Anyone can clone the repo, run <code>docker compose up</code>, and have a fully working environment in minutes — regardless of their host OS.</p>` },
+RUN composer install --no-dev --optimize-autoloader</code></pre><h3>Docker Compose: Where It Gets Powerful</h3><p>The real power comes from <code>docker-compose.yml</code>, which lets you define multiple services — PHP, Nginx, MySQL — as a single unit.</p><blockquote>Docker Compose turns complex multi-service setup into a single <code>docker compose up</code> command.</blockquote>` },
       websockets: { tag:'WebSockets', date:'December 2024', title:'Real-Time Chat: WebSockets vs. Polling — What I Learnt', body:`<p>Building my real-time chat application forced me to really understand the difference between WebSockets and HTTP polling.</p><h3>How Polling Works</h3><p>Traditional HTTP polling is conceptually simple: the client sends a request at regular intervals, asking "anything new?" But it's wasteful — most requests return empty responses.</p><pre><code>setInterval(async () => {
   const res = await fetch('/api/messages/latest');
   const messages = await res.json();
   renderMessages(messages);
-}, 2000);</code></pre><h3>WebSockets: A Persistent Connection</h3><p>WebSockets establish a persistent, bidirectional connection. Once connected, either side can push data at any time without a new HTTP request.</p><blockquote>WebSockets are like a phone call. Polling is like sending letters and hoping one arrives in time.</blockquote><h3>What Surprised Me Most</h3><p>Reconnection logic. WebSocket connections drop — network hiccups, phone lock screens, brief disconnects. Libraries like <code>socket.io</code> handle this automatically, which is a strong argument for using them over raw WebSocket APIs.</p>` },
-      design: { tag:'UI/UX', date:'November 2024', title:'Why Every Developer Should Learn Basic Design Principles', body:`<p>I used to think design was someone else's job. That thinking held me back for longer than I'd like to admit.</p><h3>The Four Principles Worth Learning First</h3><p><strong>Hierarchy:</strong> Your eye needs a clear path to follow. When everything is the same size, nothing is important.</p><p><strong>Contrast:</strong> Readable interfaces have clear contrast between text and background. Poor contrast isn't just ugly — it's inaccessible.</p><p><strong>Spacing:</strong> Whitespace is not wasted space. Elements that are too close together feel cramped and hard to parse.</p><p><strong>Consistency:</strong> A design system — even a simple one — makes interfaces predictable and trustworthy.</p><blockquote>Good design is not about making things look pretty. It's about making things work better for the person using them.</blockquote><h3>How It Changed My Code</h3><p>Once I understood spacing, I stopped hardcoding random pixel values and started using consistent spacing scales. My CSS became more intentional. My pull requests stopped coming back with design feedback.</p>` },
-      khalti: { tag:'Career', date:'October 2024', title:'What My Internship at Khalti Taught Me About Real-World Dev', body:`<p>Three months at Khalti was more educational than a full semester of coursework. Not because the work was harder, but because it was real — real users, real consequences, real team dynamics.</p><h3>Communication is the Core Skill</h3><p>The first thing that surprised me was how much time was spent communicating. Stand-ups, Slack messages, Jira comments, clarification calls. Technical ability gets you in the door, but communication determines how effective you actually are.</p><blockquote>A great solution that nobody understands is worth less than a good solution that everyone can maintain.</blockquote><h3>Fintech is Unforgiving</h3><p>Digital payments aren't like a blog. When something goes wrong, real money and real trust are at stake. I watched senior colleagues triple-check procedures before executing anything that touched transaction data.</p><h3>What I'd Tell My Pre-Internship Self</h3><p>Ask more questions earlier. Nobody expects an intern to know everything — but they do appreciate someone who asks smart questions rather than guessing wrong.</p>` }
+}, 2000);</code></pre><h3>WebSockets: A Persistent Connection</h3><p>WebSockets establish a persistent, bidirectional connection. Once connected, either side can push data at any time without a new HTTP request.</p><blockquote>WebSockets are like a phone call. Polling is like sending letters and hoping one arrives in time.</blockquote>` },
+      design: { tag:'UI/UX', date:'November 2024', title:'Why Every Developer Should Learn Basic Design Principles', body:`<p>I used to think design was someone else's job. That thinking held me back for longer than I'd like to admit.</p><h3>The Four Principles Worth Learning First</h3><p><strong>Hierarchy:</strong> Your eye needs a clear path to follow. When everything is the same size, nothing is important.</p><p><strong>Contrast:</strong> Readable interfaces have clear contrast between text and background. Poor contrast isn't just ugly — it's inaccessible.</p><p><strong>Spacing:</strong> Whitespace is not wasted space. Elements that are too close together feel cramped and hard to parse.</p><p><strong>Consistency:</strong> A design system — even a simple one — makes interfaces predictable and trustworthy.</p><blockquote>Good design is not about making things look pretty. It's about making things work better for the person using them.</blockquote>` },
+      khalti: { tag:'Career', date:'October 2024', title:'What My Internship at Khalti Taught Me About Real-World Dev', body:`<p>Three months at Khalti was more educational than a full semester of coursework. Not because the work was harder, but because it was real — real users, real consequences, real team dynamics.</p><h3>Communication is the Core Skill</h3><p>The first thing that surprised me was how much time was spent communicating. Stand-ups, Slack messages, Jira comments, clarification calls. Technical ability gets you in the door, but communication determines how effective you actually are.</p><blockquote>A great solution that nobody understands is worth less than a good solution that everyone can maintain.</blockquote><h3>What I'd Tell My Pre-Internship Self</h3><p>Ask more questions earlier. Nobody expects an intern to know everything — but they do appreciate someone who asks smart questions rather than guessing wrong.</p>` }
     };
 
     function openBlog(key) {
-      const data = blogData[key];
-      if (!data) return;
-      document.getElementById('blogModalBody').innerHTML = `<div class="blog-modal-tag">${data.tag}</div><div class="blog-modal-date">${data.date}</div><div class="blog-modal-title">${data.title}</div><div class="blog-modal-body">${data.body}</div>`;
+      const d = blogData[key];
+      if (!d) return;
+      document.getElementById('blogModalBody').innerHTML = `<div class="blog-modal-tag">${d.tag}</div><div class="blog-modal-date">${d.date}</div><div class="blog-modal-title">${d.title}</div><div class="blog-modal-body">${d.body}</div>`;
       document.getElementById('blogModal').classList.add('open');
       document.body.style.overflow = 'hidden';
       document.getElementById('blogModalContent').scrollTop = 0;
     }
-    function closeBlogModal(e) { if (e.target === document.getElementById('blogModal')) closeBlogModalBtn(); }
+    function closeBlogModal(e) { if (e.target.id === 'blogModal') closeBlogModalBtn(); }
     function closeBlogModalBtn() { document.getElementById('blogModal').classList.remove('open'); document.body.style.overflow = ''; }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLightbox(); closeBlogModalBtn(); } });
   </script>
 </body>
 </html>
