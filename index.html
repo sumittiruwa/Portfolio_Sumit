@@ -251,8 +251,43 @@
     .edu-institution { font-size: 13px; color: var(--accent); margin-bottom: 3px; }
     .edu-period { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
 
-    /* ── SKILLS ── */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+    /* ── SKILLS TABBED ── */
+    .skills-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .skills-tab {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Syne', sans-serif;
+    }
+    .skills-tab:hover:not(.active) {
+      border-color: rgba(255,255,255,0.25);
+      color: var(--text);
+    }
+    .skills-tab.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(200,240,96,0.06);
+    }
+
+    .skills-panel { display: none; }
+    .skills-panel.active { display: grid; }
+
+    .skills-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
     .skill-item {
       display: flex; align-items: center; gap: 14px;
       padding: 18px 20px; background: var(--surface);
@@ -263,6 +298,24 @@
     .skill-icon { font-size: 20px; }
     .skill-name { font-size: 14px; font-weight: 700; }
     .skill-type { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+    /* skill count badge */
+    .tab-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 700;
+      background: rgba(200,240,96,0.15);
+      color: var(--accent);
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+    .skills-tab.active .tab-count {
+      background: rgba(200,240,96,0.25);
+    }
 
     /* ── PROJECTS GRID ── */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
@@ -485,6 +538,8 @@
       .cert-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; padding: 28px 20px; }
       .blog-modal { padding: 28px 20px; }
+      .skills-tabs { gap: 6px; }
+      .skills-tab { padding: 7px 12px; font-size: 10px; }
     }
   </style>
 </head>
@@ -554,7 +609,7 @@
       <div class="hero-stats">
         <div><div class="hero-stat-num">9+</div><div class="hero-stat-label">Projects Built</div></div>
         <div><div class="hero-stat-num">2+</div><div class="hero-stat-label">Years Coding</div></div>
-        <div><div class="hero-stat-num">18+</div><div class="hero-stat-label">Tech Skills</div></div>
+        <div><div class="hero-stat-num">20+</div><div class="hero-stat-label">Tech Skills</div></div>
       </div>
     </div>
   </div>
@@ -563,13 +618,13 @@
   <div class="marquee-wrap">
     <div class="marquee-track">
       <div class="marquee-item">Full Stack Developer <span class="marquee-dot"></span></div>
-      <div class="marquee-item">Laravel · React · PHP <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Laravel · React · PHP · Django <span class="marquee-dot"></span></div>
       <div class="marquee-item">UI/UX Design <span class="marquee-dot"></span></div>
       <div class="marquee-item">BCA Student <span class="marquee-dot"></span></div>
       <div class="marquee-item">Kathmandu, Nepal <span class="marquee-dot"></span></div>
       <div class="marquee-item">Open To Work <span class="marquee-dot"></span></div>
       <div class="marquee-item">Full Stack Developer <span class="marquee-dot"></span></div>
-      <div class="marquee-item">Laravel · React · PHP <span class="marquee-dot"></span></div>
+      <div class="marquee-item">Laravel · React · PHP · Django <span class="marquee-dot"></span></div>
       <div class="marquee-item">UI/UX Design <span class="marquee-dot"></span></div>
       <div class="marquee-item">BCA Student <span class="marquee-dot"></span></div>
       <div class="marquee-item">Kathmandu, Nepal <span class="marquee-dot"></span></div>
@@ -640,31 +695,99 @@
     </div>
   </div>
 
-  <!-- SKILLS -->
+  <!-- ═══════════════════════════════════════════════
+       SKILLS — TABBED BY CATEGORY
+  ════════════════════════════════════════════════ -->
   <div class="section-wrap" id="skills" style="background:var(--surface);">
     <div class="section-inner">
       <div class="section-label">04 — Skills</div>
       <h2 class="section-title">Tools &amp; <em>Technologies</em></h2>
-      <div class="skills-grid">
+
+      <!-- TAB BUTTONS -->
+      <div class="skills-tabs">
+        <button class="skills-tab active" onclick="showSkillTab('all', this)">All <span class="tab-count">20</span></button>
+        <button class="skills-tab" onclick="showSkillTab('lang', this)">Programming Languages <span class="tab-count">4</span></button>
+        <button class="skills-tab" onclick="showSkillTab('frontend', this)">Frontend <span class="tab-count">3</span></button>
+        <button class="skills-tab" onclick="showSkillTab('frameworks', this)">Frameworks <span class="tab-count">3</span></button>
+        <button class="skills-tab" onclick="showSkillTab('database', this)">Database <span class="tab-count">1</span></button>
+        <button class="skills-tab" onclick="showSkillTab('devops', this)">DevOps &amp; Tools <span class="tab-count">6</span></button>
+        <button class="skills-tab" onclick="showSkillTab('auth', this)">Design &amp; Auth <span class="tab-count">3</span></button>
+      </div>
+
+      <!-- ALL -->
+      <div id="skills-all" class="skills-panel active skills-grid">
+        <!-- Programming Languages -->
         <div class="skill-item"><div class="skill-icon">⚡</div><div><div class="skill-name">JavaScript</div><div class="skill-type">Language</div></div></div>
-        <div class="skill-item"><div class="skill-icon">⚛️</div><div><div class="skill-name">React</div><div class="skill-type">Frontend</div></div></div>
-        <div class="skill-item"><div class="skill-icon">🐘</div><div><div class="skill-name">PHP</div><div class="skill-type">Backend</div></div></div>
-        <div class="skill-item"><div class="skill-icon">🔺</div><div><div class="skill-name">Laravel</div><div class="skill-type">Framework</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🐘</div><div><div class="skill-name">PHP</div><div class="skill-type">Language</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🐍</div><div><div class="skill-name">Python</div><div class="skill-type">Language</div></div></div>
         <div class="skill-item"><div class="skill-icon">☕</div><div><div class="skill-name">Java</div><div class="skill-type">Language</div></div></div>
+        <!-- Frontend -->
+        <div class="skill-item"><div class="skill-icon">⚛️</div><div><div class="skill-name">React</div><div class="skill-type">Frontend</div></div></div>
         <div class="skill-item"><div class="skill-icon">🌊</div><div><div class="skill-name">Tailwind CSS</div><div class="skill-type">CSS Framework</div></div></div>
         <div class="skill-item"><div class="skill-icon">🅱️</div><div><div class="skill-name">Bootstrap</div><div class="skill-type">CSS Framework</div></div></div>
+        <!-- Frameworks -->
+        <div class="skill-item"><div class="skill-icon">🔺</div><div><div class="skill-name">Laravel</div><div class="skill-type">PHP Framework</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🦎</div><div><div class="skill-name">Django</div><div class="skill-type">Python Framework</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🟢</div><div><div class="skill-name">Node.js</div><div class="skill-type">JS Runtime</div></div></div>
+        <!-- Database -->
         <div class="skill-item"><div class="skill-icon">🗄️</div><div><div class="skill-name">MySQL</div><div class="skill-type">Database</div></div></div>
+        <!-- DevOps & Tools -->
         <div class="skill-item"><div class="skill-icon">🐳</div><div><div class="skill-name">Docker</div><div class="skill-type">DevOps</div></div></div>
-        <div class="skill-item"><div class="skill-icon">📋</div><div><div class="skill-name">Jira</div><div class="skill-type">Project Mgmt</div></div></div>
-        <div class="skill-item"><div class="skill-icon">🔀</div><div><div class="skill-name">Git / GitHub</div><div class="skill-type">Version Control</div></div></div>
-        <div class="skill-item"><div class="skill-icon">📡</div><div><div class="skill-name">Postman</div><div class="skill-type">API Testing</div></div></div>
-        <div class="skill-item"><div class="skill-icon">🐍</div><div><div class="skill-name">Django</div><div class="skill-type">Framework</div></div></div>
-        <div class="skill-item"><div class="skill-icon">🎨</div><div><div class="skill-name">UI / UX</div><div class="skill-type">Design</div></div></div>
         <div class="skill-item"><div class="skill-icon">⚙️</div><div><div class="skill-name">GitHub Actions</div><div class="skill-type">CI / CD</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🔀</div><div><div class="skill-name">Git / GitHub</div><div class="skill-type">Version Control</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🦊</div><div><div class="skill-name">GitLab</div><div class="skill-type">DevOps / VCS</div></div></div>
+        <div class="skill-item"><div class="skill-icon">📋</div><div><div class="skill-name">Jira</div><div class="skill-type">Project Mgmt</div></div></div>
+        <div class="skill-item"><div class="skill-icon">📡</div><div><div class="skill-name">Postman</div><div class="skill-type">API Testing</div></div></div>
+        <!-- Design & Auth -->
+        <div class="skill-item"><div class="skill-icon">🎨</div><div><div class="skill-name">UI / UX</div><div class="skill-type">Design</div></div></div>
         <div class="skill-item"><div class="skill-icon">🔐</div><div><div class="skill-name">OAuth 2.0</div><div class="skill-type">Authentication</div></div></div>
         <div class="skill-item"><div class="skill-icon">🪙</div><div><div class="skill-name">JWT</div><div class="skill-type">Auth Tokens</div></div></div>
-        <div class="skill-item"><div class="skill-icon">🦊</div><div><div class="skill-name">GitLab</div><div class="skill-type">DevOps / VCS</div></div></div>
       </div>
+
+      <!-- PROGRAMMING LANGUAGES -->
+      <div id="skills-lang" class="skills-panel skills-grid">
+        <div class="skill-item"><div class="skill-icon">⚡</div><div><div class="skill-name">JavaScript</div><div class="skill-type">Language</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🐘</div><div><div class="skill-name">PHP</div><div class="skill-type">Language</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🐍</div><div><div class="skill-name">Python</div><div class="skill-type">Language</div></div></div>
+        <div class="skill-item"><div class="skill-icon">☕</div><div><div class="skill-name">Java</div><div class="skill-type">Language</div></div></div>
+      </div>
+
+      <!-- FRONTEND -->
+      <div id="skills-frontend" class="skills-panel skills-grid">
+        <div class="skill-item"><div class="skill-icon">⚛️</div><div><div class="skill-name">React</div><div class="skill-type">Frontend Framework</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🌊</div><div><div class="skill-name">Tailwind CSS</div><div class="skill-type">CSS Framework</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🅱️</div><div><div class="skill-name">Bootstrap</div><div class="skill-type">CSS Framework</div></div></div>
+      </div>
+
+      <!-- FRAMEWORKS -->
+      <div id="skills-frameworks" class="skills-panel skills-grid">
+        <div class="skill-item"><div class="skill-icon">🔺</div><div><div class="skill-name">Laravel</div><div class="skill-type">PHP Framework</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🦎</div><div><div class="skill-name">Django</div><div class="skill-type">Python Framework</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🟢</div><div><div class="skill-name">Node.js</div><div class="skill-type">JS Runtime</div></div></div>
+      </div>
+
+      <!-- DATABASE -->
+      <div id="skills-database" class="skills-panel skills-grid">
+        <div class="skill-item"><div class="skill-icon">🗄️</div><div><div class="skill-name">MySQL</div><div class="skill-type">Relational Database</div></div></div>
+      </div>
+
+      <!-- DEVOPS & TOOLS -->
+      <div id="skills-devops" class="skills-panel skills-grid">
+        <div class="skill-item"><div class="skill-icon">🐳</div><div><div class="skill-name">Docker</div><div class="skill-type">Containerisation</div></div></div>
+        <div class="skill-item"><div class="skill-icon">⚙️</div><div><div class="skill-name">GitHub Actions</div><div class="skill-type">CI / CD</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🔀</div><div><div class="skill-name">Git / GitHub</div><div class="skill-type">Version Control</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🦊</div><div><div class="skill-name">GitLab</div><div class="skill-type">DevOps / VCS</div></div></div>
+        <div class="skill-item"><div class="skill-icon">📋</div><div><div class="skill-name">Jira</div><div class="skill-type">Project Mgmt</div></div></div>
+        <div class="skill-item"><div class="skill-icon">📡</div><div><div class="skill-name">Postman</div><div class="skill-type">API Testing</div></div></div>
+      </div>
+
+      <!-- DESIGN & AUTH -->
+      <div id="skills-auth" class="skills-panel skills-grid">
+        <div class="skill-item"><div class="skill-icon">🎨</div><div><div class="skill-name">UI / UX Design</div><div class="skill-type">Design</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🔐</div><div><div class="skill-name">OAuth 2.0</div><div class="skill-type">Authentication</div></div></div>
+        <div class="skill-item"><div class="skill-icon">🪙</div><div><div class="skill-name">JWT</div><div class="skill-type">Auth Tokens</div></div></div>
+      </div>
+
     </div>
   </div>
 
@@ -809,7 +932,7 @@
       <div class="figma-grid">
         <div class="figma-card">
           <div class="figma-card-img">
-            <img src="UIHome.png" alt="E-Commerce UI Design" id="figma-img-1" onerror="this.style.display='none'">
+            <img src="UIHome.png" alt="E-Commerce UI Design" onerror="this.style.display='none'">
           </div>
           <div class="figma-card-body">
             <div class="figma-card-header">
@@ -907,7 +1030,7 @@
   </footer>
 
   <script>
-    /* MOBILE MENU */
+    /* ── MOBILE MENU ── */
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       const burger = document.getElementById('hamburger');
@@ -921,7 +1044,18 @@
       document.body.style.overflow = '';
     }
 
-    /* LIGHTBOX */
+    /* ── SKILLS TABS ── */
+    function showSkillTab(tab, btn) {
+      /* hide all panels */
+      document.querySelectorAll('.skills-panel').forEach(p => p.classList.remove('active'));
+      /* deactivate all tab buttons */
+      document.querySelectorAll('.skills-tab').forEach(t => t.classList.remove('active'));
+      /* activate chosen panel and button */
+      document.getElementById('skills-' + tab).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    /* ── LIGHTBOX ── */
     function openLightbox(src) {
       document.getElementById('lightbox-img').src = src;
       document.getElementById('lightbox').style.display = 'flex';
@@ -932,7 +1066,7 @@
       document.body.style.overflow = '';
     }
 
-    /* BLOG DATA */
+    /* ── BLOG DATA ── */
     const blogData = {
       laravel: { tag:'Laravel', date:'March 2025', title:'Building RESTful APIs with Laravel: A Practical Guide', body:`<p>Laravel has become one of the most popular PHP frameworks for building robust REST APIs, and for good reason. Its elegant syntax, built-in tools, and extensive ecosystem make API development feel natural and enjoyable.</p><h3>Setting Up the Foundation</h3><p>Before writing a single route, structure matters. I always start by creating a dedicated <code>api</code> version prefix in <code>routes/api.php</code>. This lets you evolve your API without breaking existing clients.</p><pre><code>Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
@@ -963,7 +1097,9 @@ RUN composer install --no-dev --optimize-autoloader</code></pre><h3>Docker Compo
     function closeBlogModal(e) { if (e.target.id === 'blogModal') closeBlogModalBtn(); }
     function closeBlogModalBtn() { document.getElementById('blogModal').classList.remove('open'); document.body.style.overflow = ''; }
 
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLightbox(); closeBlogModalBtn(); } });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeLightbox(); closeBlogModalBtn(); }
+    });
   </script>
 </body>
 </html>
