@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Portfolio - About Me</title>
+
+<style>
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.about-container {
+  max-width: 800px;
+  text-align: center;
+  border: 2px solid #fff;
+  padding: 50px;
+  border-radius: 20px;
+
+  /* animation */
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1.2s ease forwards;
+}
+
+/* ===== TEXT STYLES ===== */
+.about h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.about h1 span {
+  color: #000;
+  background: #fff;
+  padding: 5px 10px;
+}
+
+.about p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ccc;
+  margin-top: 20px;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* small glow effect */
+.about-container:hover {
+  box-shadow: 0 0 20px #fff;
+  transition: 0.4s;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ABOUT SECTION -->
+<section class="about">
+  <div class="about-container">
+    
+    <h1>About <span>Me</span></h1>
+
+    <p>
+      I am a passionate Full Stack Developer skilled in building modern,
+      scalable web applications. I work with technologies like
+      <b>Node.js</b>, <b>React</b>, <b>Python</b>, and <b>Docker</b>.
+    </p>
+
+    <p>
+      I love creating clean backend systems, designing APIs, and building
+      user-friendly interfaces that deliver real-world impact.
+    </p>
+
+  </div>
+</section>
+
+</body>
+</html>
